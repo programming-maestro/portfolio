@@ -1,0 +1,1 @@
+Static portfolio site for Chetan Maikhuri. Open index.html in a browser (file:// or via localhost). Header/footer are injected via assets/js/template.js. PDFs are in assets/pdfs/.
