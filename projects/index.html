@@ -5,52 +5,143 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Projects — Chetan Maikhuri</title>
+    <meta name="description" content="Major performance and automation projects led by Chetan Maikhuri.">
+
+    <!-- Global site styles -->
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
 <body>
-    <div id="site-header-placeholder"></div>
-    <main class="container">
-        <!-- Companies -->
-        <section class="card" style="margin-top:10px">
+    <div class="container">
 
-            <h2 id="projects">Projects</h2>
+        <!-- Header injected by template.js -->
+        <header id="site-header-placeholder"></header>
 
-            <div class="project-grid companies-grid-2">
-                <!-- Performance -->
-                <a href="performance.html" class="card card-clickable company-card">
-                    <strong>Performance Major Projects</strong>
-                    <p>Example</p>
-                </a>
+        <main>
+            <!-- Outer card that holds the grid -->
+            <section class="card projects-page">
+                <header class="projects-page-header">
+                    <h1>Projects</h1>
+                    <p class="projects-page-intro">
+                        A selection of performance, automation and shadow-testing projects across web, backend
+                        and mobile platforms.
+                    </p>
+                </header>
 
-                <!-- UI Automation -->
-                <a href="automation.html" class="card card-clickable company-card">
-                    <strong>Automation Major Projects</strong>
-                    <p>UI automation</p>
-                </a>
+                <!-- ✅ 2 cards per row on desktop, fills parent width -->
+                <div class="project-grid-2 projects-grid">
+                    <!-- Card 1: Performance -->
+                    <a href="performance.html" class="card card-clickable project-card">
+                        <div class="project-card-body">
+                            <h2 class="project-card-title">Performance Major Projects</h2>
+                            <p class="project-card-subtitle">
+                                Distributed performance testing across web, APIs and databases using JMeter, Locust and
+                                K6.
+                            </p>
+                            <div class="chips">
+                                <span class="chip">JMeter</span>
+                                <span class="chip">Locust</span>
+                                <span class="chip">K6</span>
+                                <span class="chip">Distributed load</span>
+                            </div>
+                        </div>
+                        <div class="project-card-meta">
+                            <span class="chip">View details</span>
+                        </div>
+                    </a>
 
-                <!-- Showdow Testing -->
-                <a href="shadow-testing.html" class="card card-clickable company-card">
-                    <strong>Shadow Verification Framework</strong>
-                    <p>Production data conversion checked in UAT</p>
-                </a>
+                    <!-- Card 2: Automation -->
+                    <a href="automation.html" class="card card-clickable project-card">
+                        <div class="project-card-body">
+                            <h2 class="project-card-title">Automation Major Projects</h2>
+                            <p class="project-card-subtitle">
+                                Web, mobile and API automation frameworks with device-farm integrations and CI
+                                pipelines.
+                            </p>
+                            <div class="chips">
+                                <span class="chip">Selenium</span>
+                                <span class="chip">Appium</span>
+                                <span class="chip">REST Assured</span>
+                                <span class="chip">Device farm</span>
+                            </div>
+                        </div>
+                        <div class="project-card-meta">
+                            <span class="chip">View details</span>
+                        </div>
+                    </a>
 
-                <!-- Mobile Testing -->
-                <a href="mobile-automation.html" class="card card-clickable company-card">
-                    <strong>Mobile Automation & Device Farm</strong>
-                    <p>Blended Automation execution on On-Premies device farm.</p>
-                </a>
+                    <!-- Card 3: Shadow Verification -->
+                    <a href="shadow-testing.html" class="card card-clickable project-card">
+                        <div class="project-card-body">
+                            <h2 class="project-card-title">Shadow Verification Framework</h2>
+                            <p class="project-card-subtitle">
+                                Parallel verification of new services against production traffic to derisk rollouts.
+                            </p>
+                            <div class="chips">
+                                <span class="chip">Shadow testing</span>
+                                <span class="chip">Canary</span>
+                                <span class="chip">Prod traffic</span>
+                            </div>
+                        </div>
+                        <div class="project-card-meta">
+                            <span class="chip">View details</span>
+                        </div>
+                    </a>
 
-            </div>
-        </section>
-        <section class="card" style="margin-top:12px">
-            <h3>Need more detail?</h3>
-            <p>Visit <a href="../contact.html">Contact</a> to send a message or embed your Google Form.</p>
-        </section>
-    </main>
-    <div id="site-footer-placeholder"></div>
+                    <!-- Card 4: Mobile Automation & Device Farm -->
+                    <a href="mobile-automation.html" class="card card-clickable project-card">
+                        <div class="project-card-body">
+                            <h2 class="project-card-title">Mobile Automation & Device Farm</h2>
+                            <p class="project-card-subtitle">
+                                Real-device test pipelines integrated with CI to reduce mobile test times and improve
+                                release quality.
+                            </p>
+                            <div class="chips">
+                                <span class="chip">Mobile</span>
+                                <span class="chip">Device farm</span>
+                                <span class="chip">HeadSpin</span>
+                            </div>
+                        </div>
+                        <div class="project-card-meta">
+                            <span class="chip">View details</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Optional sidebar / extra info -->
+            <section class="card projects-page-extra">
+                <h2>Need more detail?</h2>
+                <p>
+                    Full performance and automation project packs are available as PDFs. Use them for deep-dive
+                    discussions or interviews.
+                </p>
+                <ul>
+                    <li>
+                        <a href="../assets/pdfs/performance_projects.pdf" target="_blank" rel="noopener">
+                            Download performance projects (PDF)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../assets/pdfs/automation_projects.pdf" target="_blank" rel="noopener">
+                            Download automation projects (PDF)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../contact.html">
+                            Contact me for a walkthrough or case-study session
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+        <!-- Footer injected by template.js -->
+        <footer id="site-footer-placeholder"></footer>
+    </div>
+
+    <!-- Template: header/footer + theme/lang toggle -->
     <script src="../assets/js/template.js"></script>
-    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

@@ -323,3 +323,92 @@ header.site-header {
     order: 2;
   }
 }
+
+/* =========================================
+   11. Projects page layout
+========================================= */
+
+.projects-main {
+  /* optional, if you have a generic layout class already, you can skip this */
+  padding: 2rem 1rem;
+}
+
+.projects-inner {
+  max-width: 1100px; /* keeps things nicely centered */
+  margin: 0 auto;
+}
+
+/* Fix left indent if you're using UL/OL */
+.projects-list {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+/* 2 cards per row layout */
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* center cards in the row */
+  gap: 1.5rem; /* space between cards */
+}
+
+/* Card sizing so each uses half the row (almost full width of its half) */
+.project-card {
+  box-sizing: border-box;
+  flex: 0 1 calc(50% - 1.5rem); /* 2 per row, subtract gap */
+  max-width: 520px; /* stops them from getting too huge on very wide screens */
+}
+
+/* Make card fill its column almost fully */
+.project-card > * {
+  width: 100%;
+}
+
+/* Stack to 1 per row on small screens */
+@media (max-width: 700px) {
+  .project-card {
+    flex: 0 1 100%;
+    max-width: 100%;
+  }
+}
+
+/* =========================================
+   Global card hover – all clickable cards
+   ========================================= */
+
+/* Base clickable card: smooth transitions */
+.card.card-clickable {
+  position: relative;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease,
+    background-color 0.18s ease;
+}
+
+/* Hover: subtle lift + stronger border using theme vars */
+.card.card-clickable:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong, var(--accent));
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+}
+
+/* Active (while clicking): tiny press-down effect */
+.card.card-clickable:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Optional: chips inside clickable cards get a little motion */
+.card.card-clickable .chip {
+  transition:
+    transform 0.16s ease,
+    background-color 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.card.card-clickable:hover .chip {
+  transform: translateY(-1px);
+}
