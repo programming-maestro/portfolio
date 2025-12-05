@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -7,79 +8,163 @@
   <meta name="description" content="Chetan Maikhuri — Quality Assurance Leader, SDET Architect, Release Engineering.">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
+
 <body>
+  <!-- Header injected via template.js -->
   <div id="site-header-placeholder"></div>
 
   <main class="container">
+    <!-- Optional hero (currently disabled)
     <section class="card entrance">
       <header style="display:flex;gap:14px;align-items:center">
         <div class="avatar" style="width:92px;height:92px;font-size:32px">CM</div>
         <div>
           <h1 style="margin:0">Chetan Maikhuri</h1>
-          <div style="color:var(--muted)">Quality Assurance Leader • SDET Architect • Release Engineering — 13+ years delivering QA strategy, automation and performance.</div>
-          <div style="margin-top:8px"><a class="chip" href="assets/pdfs/resume.pdf" download>Download Resume (PDF)</a></div>
+          <div style="color:var(--muted)">
+            Quality Assurance Leader • SDET Architect • Release Engineering — 13+ years
+            delivering QA strategy, automation and performance.
+          </div>
+          <div style="margin-top:8px">
+            <a class="chip" href="assets/pdfs/resume.pdf" download>Download Resume (PDF)</a>
+          </div>
         </div>
       </header>
     </section>
+    -->
 
-    
     <div class="main-grid">
       <div>
-        <section class="card entrance">
+        <!-- About -->
+        <section class="card section">
           <h2>About</h2>
-          <p>Director-level QA leader with extensive experience building 0→1→scaled QA organisations, automation modernization and release governance. Partner to CTOs & VP Engineering for quality roadmaps and release reliability.</p>
-          <div class="chips" style="margin-top:8px">
-            <span class="chip">QA Strategy</span><span class="chip">SDET Architecture</span><span class="chip">Performance</span><span class="chip">Automation</span>
-            <span class="chip">CI/CD</span><span class="chip">Data QA</span>
+          <p>
+            Director-level QA leader with extensive experience building 0→1→scaled QA organisations, automation
+            modernization and release governance. I partner with CTOs and VP Engineering to deliver quality roadmaps,
+            reduce defect leakage and improve release predictability.
+          </p>
+          <div class="skills" style="margin-top:8px">
+            <span class="chip">Release Management</span>
+            <span class="chip">QA Strategy</span>
+            <span class="chip">Test Automation</span>
+            <span class="chip">Performance Testing</span>
+            <span class="chip">Data &amp; Platform QA</span>
           </div>
         </section>
 
-        <section class="card">
-          <h2 id="projects">Featured Projects</h2>
+        <!-- Companies -->
+        <section class="card" style="margin-top:10px">
+          <a href="companies/index.html">
+            <h2 id="projects">Companies</h2>
+          </a>
+          <div class="project-grid companies-grid">
+            <!-- Truemeds -->
+            <a href="companies/truemeds.html" class="card card-clickable company-card">
+              <strong>Truemeds</strong>
+              <p>pharmacutial eCommerce platform</p>
+            </a>
+
+            <!-- Sharechat -->
+            <a href="companies/sharechat.html" class="card card-clickable company-card">
+              <strong>Sharechat</strong>
+              <p>Entertainment platform</p>
+            </a>
+
+            <!-- Amazon -->
+            <a href="companies/amazon.html" class="card card-clickable company-card">
+              <strong>Amazon</strong>
+              <p>DCCS digital</p>
+            </a>
+
+            <!-- UBS -->
+            <a href="companies/swissbank.html" class="card card-clickable company-card">
+              <strong>UBS</strong>
+              <p>FXMM backend middleware and frontend</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="card" style="margin-top:10px">
+          <a href="projects/index.html">
+            <h2 id="projects">Featured Projects</h2>
+          </a>
           <div class="project-grid">
-            <div class="card" style="padding:12px">
-              <strong>Performance Engineering — Web & Backend</strong>
-              <div class="chip" style="margin-top:8px">JMeter • Locust • K6</div>
-              <p>Distributed load testing, frontend render optimizations and backend scaling validations. Reduced frontend load time and identified backend bottlenecks. See performance projects for details.</p>
-              <a class="chip" href="projects/performance.html">Open project</a>
-            </div>
-            <div class="card" style="padding:12px">
-              <strong>Automation — In-house & Mobile</strong>
-              <div class="chip" style="margin-top:8px">Selenium • Appium • Python</div>
-              <p>Built modular automation frameworks, mobile device-farm integrations and a shadow verification approach to validate new services against live traffic.</p>
-              <a class="chip" href="projects/automation.html">Open project</a>
-            </div>
-            <div class="card" style="padding:12px">
+            <!-- Performance Testing -->
+            <a href="projects/performance.html" class="card card-clickable">
+              <strong>Performance Testing (Web &amp; Backend)</strong>
+              <div class="chip" style="margin:8px auto 0; display:block; width:fit-content;">JMeter • Locust • K6</div>
+              <p>
+                Distributed load testing, frontend render optimizations and backend scaling validations. Reduced
+                frontend load time and identified backend bottlenecks. See performance projects for details.
+              </p>
+            </a>
+
+            <!-- Automation -->
+            <a href="projects/automation.html" class="card card-clickable">
+              <strong>Automation Testing (Web, App, API)</strong>
+              <div class="chip" style="margin:8px auto 0; display:block; width:fit-content;">JMeter • Locust • K6</div>
+              <p>
+                Built modular automation frameworks, mobile device-farm integrations and a shadow verification
+                approach to validate new services against live traffic.
+              </p>
+            </a>
+
+            <!-- Shadow Automation Testing -->
+            <a href="projects/shadow-testing.html" class="card card-clickable">
               <strong>Shadow Verification Framework</strong>
-              <div class="chip" style="margin-top:8px">Python • Docker</div>
-              <p>Parallel validation of new services against prod traffic to ensure backward compatibility and faster releases.</p>
-              <a class="chip" href="projects/shadow-testing.html">Open project</a>
-            </div>
-            <div class="card" style="padding:12px">
-              <strong>Mobile Device Farm & CI</strong>
-              <div class="chip" style="margin-top:8px">HeadSpin • Appium</div>
-              <p>Real-device testing pipelines integrated with CI to reduce mobile test time and improve release quality.</p>
-              <a class="chip" href="projects/mobile-automation.html">Open project</a>
-            </div>
+              <div class="chip" style="margin:8px auto 0; display:block; width:fit-content;">JMeter • Locust • K6</div>
+              <p>
+                Parallel validation of new services against prod traffic to ensure backward compatibility and faster
+                releases.
+              </p>
+            </a>
+
+            <!-- Mobile Device Farm & CI -->
+            <a href="projects/mobile-automation.html" class="card card-clickable">
+              <strong>Mobile Device Farm &amp; CI</strong>
+              <div class="chip" style="margin:8px auto 0; display:block; width:fit-content;">JMeter • Locust • K6</div>
+              <p>
+                Real-device testing pipelines integrated with CI to reduce mobile test time and improve release
+                quality.
+              </p>
+            </a>
           </div>
         </section>
       </div>
 
+      <!-- Sidebar -->
       <aside class="card aside">
         <h3>Contact</h3>
         <div style="color:var(--muted)">
-          <div>Email: <a href="mailto:csm@outlook.in">csm@outlook.in</a></div>
-          <div style="margin-top:6px">LinkedIn: <a href="https://www.linkedin.com/in/cm6/" target="_blank">linkedin.com/in/cm6</a></div>
-          <div style="margin-top:6px">Phone: +91 8286 800 987</div>
-          <div style="margin-top:12px"><a class="chip" href="companies/index.html">View companies</a></div>
+          <div style="margin-top:6px">
+            LinkedIn:
+            <a href="https://www.linkedin.com/in/cm6/" target="_blank">linkedin.com/in/cm6</a>
+          </div>
+          <div style="margin-top:6px">
+            Website:
+            <a href="https://chetan-maikhuri.onrender.com/" target="_blank">chetan-maikhuri.onrender.com</a>
+          </div>
+          <div style="margin-top:6px">
+            GitHub:
+            <a href="https://github.com/programming-maestro" target="_blank">programming-maestro</a>
+          </div>
+          <div style="margin-top:6px">
+            Email:
+            <a href="mailto:csm@outlook.in">csm@outlook.in</a>
+          </div>
+          <div style="margin-top:6px">
+            Phone: (+91) 8286 800 987
+          </div>
         </div>
       </aside>
     </div>
   </main>
 
+  <!-- Footer injected via template.js -->
   <div id="site-footer-placeholder"></div>
 
   <script src="assets/js/template.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
+
 </html>
