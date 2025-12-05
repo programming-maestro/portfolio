@@ -79,12 +79,29 @@ a {
 /* =========================================
    4. Header & navigation
 ========================================= */
+/* header.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 12px 0;
+} */
 header.site-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
   padding: 12px 0;
+
+  /* 👇 make header stick to the top */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  /* make sure it has an opaque-ish background so content doesn't show through */
+  /* background: linear-gradient(180deg, var(--bg), #071528); */
+  background: var(--bg);
+  backdrop-filter: blur(10px);
 }
 
 .brand {
@@ -291,6 +308,9 @@ header.site-header {
   font-size: 14px;
   text-align: center;
   margin-top: 28px;
+}
+.projects-page-extra {
+  margin-top: 20px; /* space above the card */
 }
 
 /* =========================================
