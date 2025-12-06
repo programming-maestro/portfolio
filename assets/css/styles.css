@@ -475,12 +475,26 @@ header.site-header {
   font-size: 14px;
 }
 
-.contact-list li,
-.meta-list li {
+/* Contact list: icon + text */
+.contact-list li {
   display: grid;
-  grid-template-columns: 22px 1fr;
+  grid-template-columns: 22px 1fr; /* small column for emoji/icon */
   align-items: flex-start;
   gap: 6px;
+}
+
+/* "Currently" meta list: label + value */
+.meta-list li {
+  display: grid;
+  grid-template-columns: minmax(90px, auto) 1fr; /* label gets enough width */
+  align-items: flex-start;
+  column-gap: 10px;
+  row-gap: 4px;
+}
+
+/* Optional: make labels slightly bolder */
+.meta-list li span:first-child {
+  font-weight: 500;
 }
 
 .contact-list a {

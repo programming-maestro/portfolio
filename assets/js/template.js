@@ -52,7 +52,7 @@
       <div class="avatar"><img src="${base}assets/images/avatar.svg" alt="avatar" style="width:56px;height:56px;display:block" /></div>
       <div>
         <div style="font-weight:700;font-size:18px">Chetan Maikhuri</div>
-        <div style="color:var(--muted);font-size:13px">Quality Assurance Leader • SDET Architect</div>
+        <div style="color:var(--muted);font-size:13px">Quality Assurance Leader</div>
       </div>
     </div>
     <nav class="nav" aria-label="Main navigation">
