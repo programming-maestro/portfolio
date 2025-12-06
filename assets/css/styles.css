@@ -224,6 +224,7 @@ header.site-header {
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 10px;
+  justify-content: center; /* ← ADD THIS */
 }
 
 .chip {
@@ -378,6 +379,7 @@ header.site-header {
   box-sizing: border-box;
   flex: 0 1 calc(50% - 1.5rem); /* 2 per row, subtract gap */
   max-width: 520px; /* stops them from getting too huge on very wide screens */
+  text-align: center;
 }
 
 /* Make card fill its column almost fully */
@@ -415,6 +417,18 @@ header.site-header {
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
 }
 
+/* On card hover, turn titles hyperlink blue */
+.card.card-clickable:hover .project-card-title,
+.card.card-clickable:hover .card-title {
+  color: var(--accent);
+}
+
+/* Homepage cards: make the first <strong> look like a blue link on hover */
+.companies-grid .card.card-clickable:hover > strong,
+.project-grid .card.card-clickable:hover > strong {
+  color: var(--accent);
+}
+
 /* Active (while clicking): tiny press-down effect */
 .card.card-clickable:active {
   transform: translateY(-1px);
@@ -431,4 +445,130 @@ header.site-header {
 
 .card.card-clickable:hover .chip {
   transform: translateY(-1px);
+}
+
+/* =========================================
+   Aside / contact styling
+   ========================================= */
+.contact-card h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.contact-card h3 {
+  margin-top: 18px;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.contact-list,
+.meta-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.contact-list li,
+.meta-list li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.contact-list a {
+  word-break: break-all;
+}
+
+/* Thin divider inside the card */
+.aside-divider {
+  margin: 14px 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(148, 163, 184, 0),
+    rgba(148, 163, 184, 0.35),
+    rgba(148, 163, 184, 0)
+  );
+}
+
+/* Stats grid in aside */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+
+.stat {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--glass);
+  text-align: left;
+}
+
+.stat-number {
+  display: block;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* Availability pill */
+.aside-availability {
+  margin-top: 10px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.12);
+  color: #bbf7d0;
+}
+
+[data-theme="light"] .aside-availability {
+  background: rgba(34, 197, 94, 0.08);
+  color: #166534;
+}
+
+.aside-availability .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #22c55e;
+}
+
+/* Tighter card title hierarchy globally */
+.card h2,
+.card h3 {
+  margin-top: 0;
+}
+
+/* Accent heading utility – use for About / Companies / Featured Projects labels */
+.heading-accent {
+  color: var(--accent); /* uses the theme token, works in dark + light */
+}
+
+/* Mobile: give aside full-width and spacing */
+@media (max-width: 900px) {
+  .aside {
+    order: 2;
+  }
+  .aside .card {
+    margin-top: 12px;
+  }
 }

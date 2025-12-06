@@ -14,7 +14,6 @@
 
   // language state
   const lang = localStorage.getItem("site_lang") || "en";
-  //const theme = localStorage.getItem('site_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
   const theme =
     localStorage.getItem("site_theme") ||
     (window.matchMedia("(prefers-color-scheme: light)").matches
