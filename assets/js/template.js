@@ -1,146 +1,176 @@
-// template.js - injects header and footer into pages, adds theme and language toggles
+// assets/js/template.js
+
 (function () {
-  const script = Array.from(document.getElementsByTagName("script"))
-    .reverse()
-    .find((s) => s.src && s.src.includes("template.js"));
-  let base = "";
-  // relative base heuristic: if path contains /companies/ or /projects/ go up one level
-  if (
-    window.location.pathname.includes("/companies/") ||
-    window.location.pathname.includes("/projects/")
-  )
-    base = "../";
-  else base = "";
+  const CURRENT_PATH = window.location.pathname;
 
-  // language state
-  const lang = localStorage.getItem("site_lang") || "en";
-  const theme =
-    localStorage.getItem("site_theme") ||
-    (window.matchMedia("(prefers-color-scheme: light)").matches
-      ? "light"
-      : "dark");
+  // -----------------------------
+  // Theme handling
+  // -----------------------------
+  const THEME_KEY = "cm_theme";
 
-  document.documentElement.setAttribute("data-theme", theme);
+  function getInitialTheme() {
+    const stored = localStorage.getItem(THEME_KEY);
+    if (stored === "light" || stored === "dark") return stored;
 
-  function t(key) {
-    const strings = {
-      en: {
-        home: "Home",
-        companies: "Companies",
-        projects: "Projects",
-        download: "Download Resume",
-        contact: "Contact",
-        theme: "Theme",
-        lang: "EN",
-      },
-      hi: {
-        home: "होम",
-        companies: "कंपनियाँ",
-        projects: "परियोजनाएँ",
-        download: "रिज़्यूमे डाउनलोड",
-        contact: "संपर्क",
-        theme: "थीम",
-        lang: "HI",
-      },
-    };
-    return (strings[lang] && strings[lang][key]) || strings["en"][key];
+    // Fall back to system preference
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      return "dark";
+    }
+    return "light";
   }
 
-  const header = `
-  <header class="site-header container card">
-    <div class="brand">
-      <div class="avatar"><img src="${base}assets/images/avatar.svg" alt="avatar" style="width:56px;height:56px;display:block" /></div>
-      <div>
-        <div style="font-weight:700;font-size:18px">Chetan Maikhuri</div>
-        <div style="color:var(--muted);font-size:13px">Quality Assurance Leader</div>
-      </div>
-    </div>
-    <nav class="nav" aria-label="Main navigation">
-      <a href="${base}index.html" data-nav>${t("home")}</a>
-      <a href="${base}companies/index.html" data-nav>${t("companies")}</a>
-      <a href="${base}projects/index.html" data-nav>${t("projects")}</a>
-      <a href="${base}assets/pdfs/resume.pdf" data-nav download>${t("download")}</a>
-      <a href="${base}#contact" data-nav>${t("contact")}</a>
-    </nav>
-    <div style="display:flex;align-items:center">
-      <button class="lang-toggle" aria-label="Toggle language">${t("lang")}</button>
-      <button class="theme-toggle" aria-label="Toggle theme">🌓</button>
-      <button class="hamburger" aria-label="Toggle menu">☰</button>
-    </div>
-  </header>
-  `;
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem(THEME_KEY, theme);
 
-  const footer = `
-  <footer class="footer container">
-    <div>© <strong>Chetan Maikhuri</strong> — Software Quality Engineering</div>
-  </footer>
-  `;
-
-  function inject() {
-    const ph = document.getElementById("site-header-placeholder");
-    if (ph) ph.outerHTML = header;
-    const pf = document.getElementById("site-footer-placeholder");
-    if (pf) pf.outerHTML = footer;
-
-    // highlight active nav
-    setTimeout(() => {
-      document.querySelectorAll("[data-nav]").forEach((a) => {
-        try {
-          const href = a.getAttribute("href");
-          const current =
-            window.location.pathname.split("/").pop() || "index.html";
-          if (href && href.includes(current)) a.classList.add("active");
-          if (
-            window.location.pathname.includes("/companies/") &&
-            href &&
-            href.includes("companies")
-          )
-            a.classList.add("active");
-          if (
-            window.location.pathname.includes("/projects/") &&
-            href &&
-            href.includes("projects")
-          )
-            a.classList.add("active");
-        } catch (e) {}
-      });
-    }, 50);
-
-    // mobile menu
-    const btn = document.querySelector(".hamburger");
-    if (btn) {
-      btn.addEventListener("click", () => {
-        const nav = document.querySelector(".nav");
-        if (nav.style.display === "flex") nav.style.display = "none";
-        else nav.style.display = "flex";
-      });
-    }
-
-    // theme toggle
-    const themeBtn = document.querySelector(".theme-toggle");
-    if (themeBtn) {
-      themeBtn.addEventListener("click", () => {
-        const current =
-          document.documentElement.getAttribute("data-theme") || "dark";
-        const next = current === "dark" ? "light" : "dark";
-        document.documentElement.setAttribute("data-theme", next);
-        localStorage.setItem("site_theme", next);
-      });
-    }
-
-    // language toggle
-    const langBtn = document.querySelector(".lang-toggle");
-    if (langBtn) {
-      langBtn.addEventListener("click", () => {
-        const next = localStorage.getItem("site_lang") === "hi" ? "en" : "hi";
-        localStorage.setItem("site_lang", next);
-        // reload to apply translations (header labels)
-        location.reload();
-      });
-    }
+    const toggleLabel = document.querySelector("[data-role='theme-label']");
+    const toggleIcon = document.querySelector("[data-role='theme-icon']");
+    if (toggleLabel)
+      toggleLabel.textContent = theme === "dark" ? "Dark" : "Light";
+    if (toggleIcon) toggleIcon.textContent = theme === "dark" ? "🌙" : "☀️";
   }
 
-  if (document.readyState === "loading")
-    document.addEventListener("DOMContentLoaded", inject);
-  else inject();
+  // -----------------------------
+  // Header / nav template
+  // -----------------------------
+  function buildHeader() {
+    // Define your nav items here; adjust paths as per your repo
+    const NAV_ITEMS = [
+      { href: "/index.html", label: "Home", pill: "Overview" },
+      { href: "/projects/index.html", label: "Projects", pill: "Case studies" },
+      { href: "/companies/index.html", label: "Experience", pill: "Roles" },
+      { href: "/contact.html", label: "Contact", pill: "Say hi" },
+    ];
+
+    const navLinks = NAV_ITEMS.map((item) => {
+      // crude active detection – checks current path ends with the item path
+      const isActive =
+        CURRENT_PATH === item.href ||
+        CURRENT_PATH.endsWith(item.href.replace(/^\//, ""));
+
+      return `
+        <a href="${item.href}" class="${isActive ? "is-active" : ""}">
+          <span class="label">${item.label}</span>
+          <span class="pill">${item.pill}</span>
+        </a>
+      `;
+    }).join("");
+
+    return `
+      <header class="site-header">
+        <div class="site-header-inner">
+          <a href="/index.html" class="brand">
+            <div class="brand-avatar">CM</div>
+            <div class="brand-text">
+              <span class="brand-name">Chetan Maikhuri</span>
+              <span class="brand-tagline">Quality Engineering · SDET · Leader</span>
+            </div>
+          </a>
+
+          <nav class="site-nav" aria-label="Primary navigation">
+            <div class="site-nav-links">
+              <div class="nav-menu">
+                <div class="nav-menu-inner">
+                  ${navLinks}
+                </div>
+              </div>
+            </div>
+
+            <button class="theme-toggle" type="button" data-role="theme-toggle">
+              <span class="theme-toggle-icon" data-role="theme-icon">☀️</span>
+              <span data-role="theme-label">Light</span>
+            </button>
+
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" data-role="nav-toggle">
+              <span></span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- Mobile nav menu (re-uses same links) -->
+        <div class="nav-menu" data-role="nav-menu">
+          <div class="nav-menu-inner">
+            ${navLinks}
+          </div>
+        </div>
+      </header>
+    `;
+  }
+
+  function buildFooter() {
+    const year = new Date().getFullYear();
+    return `
+      <footer class="site-footer">
+        <div class="site-footer-inner">
+          <div>© ${year} Chetan Maikhuri. All rights reserved.</div>
+          <div class="footer-links">
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/programming-maestro" target="_blank" rel="noopener">GitHub</a>
+            <a href="/contact.html">Contact</a>
+          </div>
+        </div>
+      </footer>
+    `;
+  }
+
+  function injectChrome() {
+    const headerHost = document.getElementById("site-header");
+    const footerHost = document.getElementById("site-footer");
+
+    if (headerHost) headerHost.innerHTML = buildHeader();
+    if (footerHost) footerHost.innerHTML = buildFooter();
+
+    // After injecting, wire up interactivity
+    setupThemeToggle();
+    setupNavToggle();
+  }
+
+  // -----------------------------
+  // Interactions
+  // -----------------------------
+  function setupThemeToggle() {
+    const initial = getInitialTheme();
+    applyTheme(initial);
+
+    const toggle = document.querySelector("[data-role='theme-toggle']");
+    if (!toggle) return;
+
+    toggle.addEventListener("click", () => {
+      const current =
+        document.documentElement.getAttribute("data-theme") || initial;
+      const next = current === "dark" ? "light" : "dark";
+      applyTheme(next);
+    });
+  }
+
+  function setupNavToggle() {
+    const btn = document.querySelector("[data-role='nav-toggle']");
+    const menu = document.querySelector("[data-role='nav-menu']");
+    if (!btn || !menu) return;
+
+    btn.addEventListener("click", () => {
+      const isOpen = btn.classList.toggle("is-open");
+      menu.classList.toggle("is-open", isOpen);
+    });
+
+    // Close menu when navigating
+    menu.addEventListener("click", (evt) => {
+      if (evt.target.closest("a")) {
+        btn.classList.remove("is-open");
+        menu.classList.remove("is-open");
+      }
+    });
+  }
+
+  // -----------------------------
+  // Init
+  // -----------------------------
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", injectChrome);
+  } else {
+    injectChrome();
+  }
 })();

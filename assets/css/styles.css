@@ -1,588 +1,740 @@
-/* =========================================
-   1. Theme & global tokens
-========================================= */
+/* ================================
+   Global variables & theme
+   ================================ */
+
 :root {
-  --bg: #071025;
-  --card: #0b1220;
-  --accent: #06b6d4;
-  --muted: #94a3b8;
-  --glass: rgba(255, 255, 255, 0.02);
-  --glass-2: rgba(255, 255, 255, 0.025);
-  --text: #e6eef6;
-  --radius: 12px;
+  /* Colors – light theme defaults */
+  --color-bg: #f7f7fb;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f0f2f8;
+  --color-text: #111827;
+  --color-text-muted: #6b7280;
+  --color-accent: #2563eb;
+  --color-accent-soft: rgba(37, 99, 235, 0.1);
+  --color-border: #e5e7eb;
+  --color-nav-bg: rgba(247, 247, 251, 0.9);
+  --shadow-soft: 0 8px 24px rgba(15, 23, 42, 0.08);
+
+  --radius-lg: 1.25rem;
+  --radius-md: 0.75rem;
+  --radius-pill: 999px;
+
+  --font-sans:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --transition-fast: 150ms ease-out;
+  --transition-med: 220ms ease-out;
+
+  /* Layout */
+  --page-max-width: 1080px;
+  --page-padding-x: 1.25rem;
+  --page-padding-y: 1.5rem;
 }
 
-[data-theme="light"] {
-  --bg: #f6f9fb;
-  --card: #ffffff;
-  --accent: #0b7285;
-  --muted: #475569;
-  --text: #061226;
-  --glass: rgba(2, 6, 23, 0.03);
+/* Dark theme – toggled with [data-theme="dark"] on <html>  */
+html[data-theme="dark"] {
+  --color-bg: #020617;
+  --color-surface: #020617;
+  --color-surface-alt: #02081c;
+  --color-text: #f9fafb;
+  --color-text-muted: #9ca3af;
+  --color-accent: #60a5fa;
+  --color-accent-soft: rgba(96, 165, 250, 0.12);
+  --color-border: #1f2937;
+  --color-nav-bg: rgba(2, 6, 23, 0.9);
+  --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.7);
 }
 
-/* =========================================
-   2. Global reset & base styles
-========================================= */
-* {
+/* Respect system preference on first load if no explicit theme */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    --color-bg: #020617;
+    --color-surface: #020617;
+    --color-surface-alt: #02081c;
+    --color-text: #f9fafb;
+    --color-text-muted: #9ca3af;
+    --color-accent: #60a5fa;
+    --color-accent-soft: rgba(96, 165, 250, 0.12);
+    --color-border: #1f2937;
+    --color-nav-bg: rgba(2, 6, 23, 0.9);
+    --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* ================================
+   Global reset / base
+   ================================ */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease;
 }
 
 html,
 body {
-  height: 100%;
   margin: 0;
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    Arial;
-  background: linear-gradient(180deg, var(--bg) 0%, #071528 100%);
-  color: var(--text);
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background: radial-gradient(circle at top, #e0edff 0, var(--color-bg) 45%);
+  color: var(--color-text);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 a {
-  color: var(--accent);
+  color: inherit;
   text-decoration: none;
-  transition: color 0.15s ease;
 }
 
-/* =========================================
-   3. Layout helpers
-========================================= */
-.container {
-  max-width: 1100px;
-  margin: 28px auto;
-  padding: 18px;
+main {
+  display: block;
 }
 
-.container1 {
-  max-width: 1100px;
-  margin: 1px auto 25px auto;
-  padding: 0 20px;
+/* Container utility */
+.page-shell {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: var(--page-padding-y) var(--page-padding-x) 3.5rem;
 }
 
-.main-grid {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 20px;
-  margin-top: 18px;
-}
+/* ================================
+   Top navigation / header
+   ================================ */
 
-/* =========================================
-   4. Header & navigation
-========================================= */
-/* header.site-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 12px 0;
-} */
-header.site-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 12px 0;
-
-  /* 👇 make header stick to the top */
+.site-header {
   position: sticky;
   top: 0;
-  z-index: 1000;
-
-  /* make sure it has an opaque-ish background so content doesn't show through */
-  /* background: linear-gradient(180deg, var(--bg), #071528); */
-  background: var(--bg);
-  backdrop-filter: blur(10px);
+  z-index: 40;
+  backdrop-filter: blur(16px);
+  background: var(--color-nav-bg);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
 }
 
+.site-header-inner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0.75rem var(--page-padding-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* Brand */
 .brand {
   display: flex;
-  gap: 12px;
   align-items: center;
+  gap: 0.6rem;
 }
 
-.avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  background: var(--accent);
-  display: flex;
+.brand-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #2563eb, #14b8a6);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  color: #061226;
-  font-size: 20px;
-  overflow: hidden;
+  color: #ffffff;
+  box-shadow: var(--shadow-soft);
+  flex-shrink: 0;
 }
 
-.nav {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-}
-
-.nav a {
-  padding: 8px 10px;
-  border-radius: 8px;
-  color: var(--muted);
-  font-weight: 600;
-}
-
-.nav a.active {
-  background: var(--glass-2);
-  color: var(--text);
-}
-
-.hamburger {
-  display: none;
-  padding: 8px;
-  border-radius: 8px;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-/* Header controls (theme / language) */
-.theme-toggle,
-.lang-toggle {
-  padding: 8px 10px;
-  border-radius: 8px;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  color: var(--muted);
-  margin-left: 8px;
-  cursor: pointer;
-}
-
-.theme-toggle:hover,
-.lang-toggle:hover {
-  color: var(--text);
-}
-
-/* =========================================
-   5. Cards & animations
-========================================= */
-.card {
-  background: var(--card);
-  padding: 18px;
-  border-radius: var(--radius);
-  box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  transform: translateY(0);
-  opacity: 1;
-  transition: opacity 0.35s ease;
-  will-change: transform, opacity;
-}
-
-/* Entrance animation (optional class you add via JS) */
-.card.entrance {
-  transform: translateY(6px);
-  opacity: 0;
-  animation: cardIn 0.45s forwards cubic-bezier(0.2, 0.9, 0.2, 1);
-}
-
-@keyframes cardIn {
-  from {
-    transform: translateY(6px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Make whole card clickable */
-.card-clickable {
-  display: block;
-  cursor: pointer;
-  color: inherit;
-  text-decoration: none;
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease;
-}
-
-.card-clickable:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.5);
-}
-
-/* =========================================
-   6. Chips / tags
-========================================= */
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-  justify-content: center; /* ← ADD THIS */
-}
-
-.chip {
-  display: inline-block;
-  background: var(--glass);
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 13px;
-  color: var(--text);
-  text-decoration: none;
-}
-
-.chip a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* Prevent chips inside clickable cards from stealing clicks */
-.card-clickable .chip {
-  pointer-events: none;
-}
-
-/* =========================================
-   7. Project grid
-========================================= */
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-/*Project Homepage*/
-.project-grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 50px;
-}
-
-.project {
-  padding: 12px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent);
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.project:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.5);
-}
-
-/* =========================================
-   8. Companies grid
-========================================= */
-/*Homepage*/
-.companies-grid {
-  /* reuse project-grid layout but center items in their cells */
-  justify-items: center;
-}
-/*Company Index page*/
-/* 8b. Companies grid - 3 columns on desktop for companies page only */
-.companies-grid-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-/* Company cards: let content define height */
-.company-card {
-  padding: 10px;
-  text-align: center;
-  width: 100%;
-  max-width: 340px;
+.brand-text {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  /* no min-height so they can shrink naturally */
 }
 
-/* =========================================
-   9. Footer
-========================================= */
-.footer {
-  padding: 24px 0;
-  color: var(--muted);
-  font-size: 14px;
-  text-align: center;
-  margin-top: 28px;
-}
-.projects-page-extra {
-  margin-top: 20px; /* space above the card */
+.brand-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
-/* =========================================
-   10. Responsive
-========================================= */
-@media (max-width: 900px) {
-  .main-grid {
-    grid-template-columns: 1fr;
-  }
-
-  @media (max-width: 900px) {
-    .project-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .nav {
-    display: none;
-  }
-
-  .hamburger {
-    display: block;
-  }
-
-  .project-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .aside {
-    order: 2;
-  }
+.brand-tagline {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
 }
 
-/* =========================================
-   11. Projects page layout
-========================================= */
-
-.projects-main {
-  /* optional, if you have a generic layout class already, you can skip this */
-  padding: 2rem 1rem;
-}
-
-.projects-inner {
-  max-width: 1100px; /* keeps things nicely centered */
-  margin: 0 auto;
-}
-
-/* Fix left indent if you're using UL/OL */
-.projects-list {
-  list-style: none;
-  margin: 0;
-  padding-left: 0;
-}
-
-/* 2 cards per row layout */
-.projects-grid {
+/* Nav */
+.site-nav {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* center cards in the row */
-  gap: 1.5rem; /* space between cards */
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Card sizing so each uses half the row (almost full width of its half) */
-.project-card {
-  box-sizing: border-box;
-  flex: 0 1 calc(50% - 1.5rem); /* 2 per row, subtract gap */
-  max-width: 520px; /* stops them from getting too huge on very wide screens */
-  text-align: center;
-}
-
-/* Make card fill its column almost fully */
-.project-card > * {
-  width: 100%;
-}
-
-/* Stack to 1 per row on small screens */
-@media (max-width: 700px) {
-  .project-card {
-    flex: 0 1 100%;
-    max-width: 100%;
-  }
-}
-
-/* =========================================
-   Global card hover – all clickable cards
-   ========================================= */
-
-/* Base clickable card: smooth transitions */
-.card.card-clickable {
-  position: relative;
+/* Mobile menu button */
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
   cursor: pointer;
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    border-color 0.18s ease,
-    background-color 0.18s ease;
-}
-
-/* Hover: subtle lift + stronger border using theme vars */
-.card.card-clickable:hover {
-  transform: translateY(-3px);
-  border-color: var(--border-strong, var(--accent));
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
-}
-
-/* On card hover, turn titles hyperlink blue */
-.card.card-clickable:hover .project-card-title,
-.card.card-clickable:hover .card-title {
-  color: var(--accent);
-}
-
-/* Homepage cards: make the first <strong> look like a blue link on hover */
-.companies-grid .card.card-clickable:hover > strong,
-.project-grid .card.card-clickable:hover > strong {
-  color: var(--accent);
-}
-
-/* Active (while clicking): tiny press-down effect */
-.card.card-clickable:active {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* Optional: chips inside clickable cards get a little motion */
-.card.card-clickable .chip {
-  transition:
-    transform 0.16s ease,
-    background-color 0.16s ease,
-    border-color 0.16s ease;
-}
-
-.card.card-clickable:hover .chip {
-  transform: translateY(-1px);
-}
-
-/* =========================================
-   Aside / contact styling
-   ========================================= */
-.contact-card h2 {
-  margin-top: 0;
-  margin-bottom: 12px;
-  font-size: 18px;
-}
-
-.contact-card h3 {
-  margin-top: 18px;
-  margin-bottom: 8px;
-  font-size: 15px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.contact-list,
-.meta-list {
-  list-style: none;
   padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 6px;
-  font-size: 14px;
+  outline: none;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform 80ms ease-out;
 }
 
-/* Contact list: icon + text */
-.contact-list li {
-  display: grid;
-  grid-template-columns: 22px 1fr; /* small column for emoji/icon */
-  align-items: flex-start;
-  gap: 6px;
+.nav-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-text);
+  position: relative;
+  transition:
+    transform var(--transition-med),
+    background var(--transition-med);
 }
 
-/* "Currently" meta list: label + value */
-.meta-list li {
-  display: grid;
-  grid-template-columns: minmax(90px, auto) 1fr; /* label gets enough width */
-  align-items: flex-start;
-  column-gap: 10px;
-  row-gap: 4px;
+.nav-toggle span::before,
+.nav-toggle span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-text);
+  transition:
+    transform var(--transition-med),
+    opacity var(--transition-med);
 }
 
-/* Optional: make labels slightly bolder */
-.meta-list li span:first-child {
+.nav-toggle span::before {
+  top: -5px;
+}
+
+.nav-toggle span::after {
+  top: 5px;
+}
+
+/* Active (X) state for mobile menu button */
+.nav-toggle.is-open span {
+  transform: rotate(45deg);
+}
+
+.nav-toggle.is-open span::before {
+  transform: rotate(-90deg) translateX(-5px);
+}
+
+.nav-toggle.is-open span::after {
+  opacity: 0;
+}
+
+/* Nav menu */
+.nav-menu {
+  position: fixed;
+  inset: 56px 0 auto 0;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform var(--transition-med),
+    opacity var(--transition-med),
+    visibility var(--transition-med);
+}
+
+.nav-menu-inner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0.75rem var(--page-padding-x) 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.nav-menu a {
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  color: var(--color-text-muted);
+}
+
+.nav-menu a span.label {
   font-weight: 500;
 }
 
-.contact-list a {
-  word-break: break-all;
-}
-
-/* Thin divider inside the card */
-.aside-divider {
-  margin: 14px 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    rgba(148, 163, 184, 0),
-    rgba(148, 163, 184, 0.35),
-    rgba(148, 163, 184, 0)
-  );
-}
-
-/* Stats grid in aside */
-.stat-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 14px;
-  margin-bottom: 6px;
-}
-
-.stat {
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: var(--glass);
-  text-align: left;
-}
-
-.stat-number {
-  display: block;
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.stat-label {
-  display: block;
-  font-size: 11px;
-  color: var(--muted);
-}
-
-/* Availability pill */
-.aside-availability {
-  margin-top: 10px;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
+.nav-menu a span.pill {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.45rem;
   border-radius: 999px;
-  background: rgba(34, 197, 94, 0.12);
-  color: #bbf7d0;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
 }
 
-[data-theme="light"] .aside-availability {
-  background: rgba(34, 197, 94, 0.08);
-  color: #166534;
+.nav-menu a.is-active {
+  background: var(--color-accent-soft);
+  color: var(--color-text);
 }
 
-.aside-availability .dot {
-  width: 8px;
-  height: 8px;
+/* Open state */
+.nav-menu.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  outline: none;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform 80ms ease-out;
+}
+
+.theme-toggle-icon {
+  font-size: 0.85rem;
+}
+
+/* Focus states */
+.nav-toggle:focus-visible,
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Hide nav links inline on mobile */
+.site-nav-links {
+  display: none;
+}
+
+/* ================================
+   Hero / page header section
+   ================================ */
+
+.page-hero {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr);
+  gap: 1.8rem;
+  align-items: center;
+}
+
+.page-hero-text {
+  background: radial-gradient(
+    circle at top left,
+    var(--color-accent-soft),
+    transparent 55%
+  );
+  padding: 1.25rem 1.1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+}
+
+.page-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.15rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.12);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.page-kicker-dot {
+  width: 7px;
+  height: 7px;
   border-radius: 999px;
   background: #22c55e;
 }
 
-/* Tighter card title hierarchy globally */
-.card h2,
-.card h3 {
-  margin-top: 0;
+.page-title {
+  font-size: 1.7rem;
+  line-height: 1.15;
+  margin: 0 0 0.35rem;
 }
 
-/* Accent heading utility – use for About / Companies / Featured Projects labels */
-.heading-accent {
-  color: var(--accent); /* uses the theme token, works in dark + light */
+.page-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin: 0 0 0.75rem;
 }
 
-/* Mobile: give aside full-width and spacing */
-@media (max-width: 900px) {
-  .aside {
-    order: 2;
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.hero-pill {
+  font-size: 0.72rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.02);
+  color: var(--color-text-muted);
+}
+
+/* Hero actions */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.btn {
+  border-radius: var(--radius-pill);
+  padding: 0.55rem 1.1rem;
+  font-size: 0.82rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition:
+    transform 80ms ease-out,
+    box-shadow var(--transition-fast),
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #22c55e);
+  color: white;
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-text);
+  border-color: rgba(148, 163, 184, 0.7);
+}
+
+.btn-outline:hover {
+  background: rgba(148, 163, 184, 0.1);
+}
+
+/* Hero aside (optional illustration / stats) */
+.page-hero-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.hero-card {
+  border-radius: var(--radius-lg);
+  padding: 0.9rem 0.85rem;
+  background: var(--color-surface);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: var(--shadow-soft);
+  font-size: 0.8rem;
+}
+
+.hero-card-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+/* ================================
+   Generic sections / cards
+   ================================ */
+
+.section {
+  margin-top: 2.2rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.section-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.section-subtitle {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.section-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.card {
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  padding: 0.9rem 0.9rem 0.85rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+  transition:
+    transform 120ms ease-out,
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 45px rgba(15, 23, 42, 0.16);
+  border-color: var(--color-accent);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.card-meta {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.card-body {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.35rem;
+}
+
+.card-tag {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+/* ================================
+   Contact form
+   ================================ */
+
+.contact-form {
+  margin-top: 1.2rem;
+  padding: 1rem 0.9rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: var(--shadow-soft);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.7rem;
+}
+
+.form-row label {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.form-row input,
+.form-row textarea {
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.55rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--color-border);
+  background: rgba(15, 23, 42, 0.02);
+  color: var(--color-text);
+  outline: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.form-row input:focus,
+.form-row textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent-soft);
+}
+
+.form-hint {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+/* ================================
+   Footer
+   ================================ */
+
+.site-footer {
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 1rem var(--page-padding-x) 1.4rem;
+  background: radial-gradient(
+    circle at bottom,
+    rgba(37, 99, 235, 0.18),
+    transparent 50%
+  );
+}
+
+.site-footer-inner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* ================================
+   Responsive breakpoints
+   ================================ */
+
+@media (min-width: 640px) {
+  .page-hero {
+    grid-template-columns: minmax(0, 1.5fr);
   }
-  .aside .card {
-    margin-top: 12px;
+
+  .page-title {
+    font-size: 1.9rem;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+  }
+
+  .section-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+
+/* Tablet / small laptop */
+@media (min-width: 768px) {
+  .page-shell {
+    padding: 2.25rem var(--page-padding-x) 4rem;
+  }
+
+  .page-hero {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
+    gap: 1.75rem;
+  }
+
+  .site-header-inner {
+    padding-block: 0.8rem;
+  }
+
+  /* Desktop nav: show inline links, hide mobile menu */
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-menu {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    border-bottom: 0;
+    background: transparent;
+  }
+
+  .nav-menu-inner {
+    padding: 0;
+    flex-direction: row;
+  }
+
+  .site-nav-links {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .nav-menu a {
+    padding-inline: 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  .theme-toggle {
+    font-size: 0.78rem;
+  }
+}
+
+/* Larger desktops */
+@media (min-width: 1024px) {
+  .page-title {
+    font-size: 2.1rem;
+  }
+
+  .page-subtitle {
+    max-width: 34rem;
+  }
+
+  .section {
+    margin-top: 2.6rem;
+  }
+
+  .site-header-inner {
+    padding-inline: 0;
+  }
+
+  .page-shell {
+    padding-inline: 0;
   }
 }

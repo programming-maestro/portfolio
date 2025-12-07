@@ -2,132 +2,68 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8" />
     <title>Projects — Chetan Maikhuri</title>
-    <meta name="description" content="Major performance and automation projects led by Chetan Maikhuri.">
+    <meta name="description"
+        content="Case studies and selected projects led by Chetan Maikhuri in Quality Engineering and SDET roles." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Global site styles -->
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <script defer src="/assets/js/template.js"></script>
 </head>
 
 <body>
-    <!-- Header injected by template.js -->
-    <div id="site-header-placeholder"></div>
-    <main class="container">
-        <!-- Outer card that holds the grid -->
-        <section class="card projects-page">
-            <header class="projects-page-header">
-                <h1 class="heading-accent">Projects</h1>
-                <p class="projects-page-intro">
-                    A selection of performance, automation and shadow-testing projects across web, backend
-                    and mobile platforms.
+    <div id="site-header"></div>
+
+    <main class="page-shell" aria-labelledby="page-title">
+        <section class="page-hero">
+            <div class="page-hero-text">
+                <div class="page-kicker">
+                    <span class="page-kicker-dot"></span>
+                    <span>Case studies</span>
+                </div>
+                <h1 id="page-title" class="page-title">Projects &amp; initiatives</h1>
+                <p class="page-subtitle">
+                    A deeper look at automation frameworks, quality initiatives, and
+                    cross-team collaborations I led or contributed to.
                 </p>
-            </header>
-
-            <!-- 2 cards per row on desktop, fills parent width -->
-            <div class="project-grid-2 projects-grid">
-                <!-- Card 1: Performance -->
-                <a href="performance.html" class="card card-clickable project-card">
-                    <div class="project-card-body">
-                        <h3 class="project-card-title">Performance Major Projects</h3>
-                        <p class="project-card-subtitle">
-                            Distributed performance testing across web, APIs and databases using JMeter, Locust and
-                            K6.
-                        </p>
-                        <div class="chips">
-                            <span class="chip">JMeter</span>
-                            <span class="chip">Locust</span>
-                            <span class="chip">K6</span>
-                            <span class="chip">Distributed load</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Card 2: Automation -->
-                <a href="automation.html" class="card card-clickable project-card">
-                    <div class="project-card-body">
-                        <h3 class="project-card-title">Automation Major Projects</h3>
-                        <p class="project-card-subtitle">
-                            Web, mobile and API automation frameworks with device-farm integrations and CI
-                            pipelines.
-                        </p>
-                        <div class="chips">
-                            <span class="chip">Selenium</span>
-                            <span class="chip">Appium</span>
-                            <span class="chip">REST Assured</span>
-                            <span class="chip">Device farm</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Card 3: Shadow Verification -->
-                <a href="shadow-testing.html" class="card card-clickable project-card">
-                    <div class="project-card-body">
-                        <h3 class="project-card-title">Shadow Verification Framework</h3>
-                        <p class="project-card-subtitle">
-                            Parallel verification of new services against production traffic to derisk rollouts.
-                        </p>
-                        <div class="chips">
-                            <span class="chip">Shadow testing</span>
-                            <span class="chip">Canary</span>
-                            <span class="chip">Prod traffic</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Card 4: Mobile Automation & Device Farm -->
-                <a href="mobile-automation.html" class="card card-clickable project-card">
-                    <div class="project-card-body">
-                        <h3 class="project-card-title">Mobile Automation & Device Farm</h3>
-                        <p class="project-card-subtitle">
-                            Real-device test pipelines integrated with CI to reduce mobile test times and improve
-                            release quality.
-                        </p>
-                        <div class="chips">
-                            <span class="chip">Mobile</span>
-                            <span class="chip">Device farm</span>
-                            <span class="chip">HeadSpin</span>
-                        </div>
-                    </div>
-
-                </a>
             </div>
         </section>
 
-        <!-- Optional sidebar / extra info -->
-        <section class="card projects-page-extra" style=" top: 50px;">
-            <h2>Need more detail?</h2>
-            <p>
-                Full performance and automation project packs are available as PDFs. Use them for deep-dive
-                discussions or interviews.
-            </p>
-            <ul>
-                <li>
-                    <a href="../assets/pdfs/performance_projects.pdf" target="_blank" rel="noopener">
-                        Download performance projects (PDF)
-                    </a>
-                </li>
-                <li>
-                    <a href="../assets/pdfs/automation_projects.pdf" target="_blank" rel="noopener">
-                        Download automation projects (PDF)
-                    </a>
-                </li>
-                <li>
-                    <a href="../contact.html">
-                        Contact me for a walkthrough or case-study session
-                    </a>
-                </li>
-            </ul>
+        <section class="section" aria-labelledby="section-project-list">
+            <header class="section-header">
+                <h2 id="section-project-list" class="section-title">Highlights</h2>
+                <p class="section-subtitle">
+                    Swap these cards for one-per-project pages in /projects/ if you
+                    prefer.
+                </p>
+            </header>
+
+            <div class="section-grid">
+                <!-- Repeat card per project; link to detail pages like /projects/project-foo.html -->
+                <article class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Unified test automation platform
+                        </h3>
+                        <span class="card-meta">2023 · Platform</span>
+                    </div>
+                    <div class="card-body">
+                        Consolidated multiple test suites into a single, scalable platform
+                        with standardised reporting and dashboards for teams and
+                        leadership.
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">Playwright / Selenium</span>
+                        <span class="card-tag">Reporting</span>
+                        <span class="card-tag">Scalability</span>
+                    </div>
+                </article>
+            </div>
         </section>
     </main>
 
-    <!-- Footer injected by template.js -->
-    <footer id="site-footer-placeholder"></footer>
-
-
-    <!-- Template: header/footer + theme/lang toggle -->
-    <script src="../assets/js/template.js"></script>
+    <div id="site-footer"></div>
 </body>
 
 </html>
