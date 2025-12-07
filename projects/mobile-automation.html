@@ -1,1 +1,190 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mobile Automation & Device Farm</title><link rel="stylesheet" href="../assets/css/styles.css"></head><body><div id="site-header-placeholder"></div><main class="container"><section class="card"><h2>Mobile Automation & Device Farm</h2><p>Mobile automation integrated with HeadSpin device farm and CI pipelines to reduce mobile test times and enhance release confidence.</p><div style="margin-top:12px"><a href="../assets/pdfs/automation_projects.pdf">Source (Automation Projects PDF)</a></div></section></main><div id="site-footer-placeholder"></div><script src="../assets/js/template.js"></script><script src="../assets/js/main.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mobile Automation at Scale — Projects | Chetan Maikhuri</title>
+    <meta name="description"
+        content="Case study: building reliable mobile automation across Android and iOS using device farms, stable journeys and meaningful reporting." />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <script src="/assets/js/template.js" defer></script>
+</head>
+
+<body>
+    <header id="site-header"></header>
+
+    <main>
+        <div class="page-shell">
+            <section class="page-hero">
+                <div class="page-hero-text">
+                    <div class="page-kicker">
+                        <span class="page-kicker-dot"></span>
+                        <span>Projects</span>
+                        <span>· Mobile automation</span>
+                    </div>
+
+                    <h1 class="page-title">Mobile automation at scale</h1>
+                    <p class="page-subtitle">
+                        Bringing structure to Android and iOS automation, integrated with
+                        device farms and focused on crash-free, stable experiences.
+                    </p>
+
+                    <div class="hero-meta">
+                        <span class="hero-pill">Android & iOS</span>
+                        <span class="hero-pill">Device farms</span>
+                        <span class="hero-pill">Critical journeys</span>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a class="btn btn-outline" href="/projects/index.html">
+                            ← Back to projects
+                        </a>
+                        <a class="btn btn-primary" href="/contact.html">
+                            Discuss mobile automation
+                        </a>
+                    </div>
+                </div>
+
+                <aside class="page-hero-aside">
+                    <div class="hero-card">
+                        <div class="hero-card-title">Headline outcome</div>
+                        <p>
+                            Reduced flaky mobile tests and integrated stable suites into CI,
+                            improving confidence in each store release.
+                        </p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-title">Where this was used</div>
+                        <p>
+                            High-volume consumer apps (social, content, commerce) with
+                            diverse devices, OS versions and network conditions.
+                        </p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- Context -->
+            <section class="section">
+                <header class="section-header">
+                    <h2 class="section-title">Context & challenges</h2>
+                    <p class="section-subtitle">
+                        Flaky tests, device chaos and slow feedback loops.
+                    </p>
+                </header>
+
+                <div class="card">
+                    <div class="card-body">
+                        <ul>
+                            <li>
+                                Tests broke frequently with new OS versions or UI changes,
+                                leading teams to distrust mobile automation results.
+                            </li>
+                            <li>
+                                Local device testing didn’t reflect the diversity of the real
+                                user base (devices, OS, locales, network).
+                            </li>
+                            <li>
+                                Automation was often an afterthought — added after features were live.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Approach -->
+            <section class="section">
+                <header class="section-header">
+                    <h2 class="section-title">Approach & strategy</h2>
+                    <p class="section-subtitle">
+                        Focus on journeys, not screens, and bake automation into the lifecycle.
+                    </p>
+                </header>
+
+                <div class="card">
+                    <div class="card-body">
+                        <ul>
+                            <li>
+                                Defined a set of end-to-end journeys to always protect
+                                (app launch, login, core user actions, payments).
+                            </li>
+                            <li>
+                                Standardised test structure and naming across Android & iOS,
+                                using common patterns where possible.
+                            </li>
+                            <li>
+                                Introduced in-sprint automation expectations so that new
+                                features shipped with basic coverage from day one.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Device farm & CI -->
+            <section class="section">
+                <header class="section-header">
+                    <h2 class="section-title">Device farms & CI integration</h2>
+                    <p class="section-subtitle">
+                        Test where the users really are — not just on one or two lab devices.
+                    </p>
+                </header>
+
+                <div class="card">
+                    <div class="card-body">
+                        <ul>
+                            <li>
+                                Integrated cloud device farms into CI so key flows were
+                                validated on a matrix of devices and OS versions.
+                            </li>
+                            <li>
+                                Prioritised a realistic device matrix based on analytics
+                                (top devices, OS versions, countries).
+                            </li>
+                            <li>
+                                Collapsed noisy, flaky tests into a small, stable core set
+                                and created a backlog to fix or retire the rest.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Impact -->
+            <section class="section">
+                <header class="section-header">
+                    <h2 class="section-title">Impact & learnings</h2>
+                    <p class="section-subtitle">
+                        A mobile automation setup that teams felt safe relying on.
+                    </p>
+                </header>
+
+                <div class="card">
+                    <div class="card-body">
+                        <ul>
+                            <li>
+                                Store releases were backed by clear, automated checks
+                                instead of purely manual, late-night test runs.
+                            </li>
+                            <li>
+                                Crash-free sessions and key UX flows improved as issues
+                                were caught earlier and closer to development.
+                            </li>
+                            <li>
+                                New squads could plug into an existing framework instead
+                                of reinventing their own for each app.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-tags">
+                        <a class="card-tag" href="/contact.html">Apply this pattern to your app</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer id="site-footer"></footer>
+</body>
+
+</html>

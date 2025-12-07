@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Shadow Testing & Safe Rollouts — Projects | Chetan Maikhuri</title>
+    <title>API & Contract Automation — Projects | Chetan Maikhuri</title>
     <meta name="description"
-        content="Case study: using shadow testing and safe rollout patterns to validate new services against real traffic before full launch." />
+        content="Case study: building API and contract automation to protect integrations, speed backend changes and reduce incidents." />
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <script src="/assets/js/template.js" defer></script>
 </head>
@@ -21,19 +21,19 @@
                     <div class="page-kicker">
                         <span class="page-kicker-dot"></span>
                         <span>Projects</span>
-                        <span>· Shadow testing</span>
+                        <span>· API automation</span>
                     </div>
 
-                    <h1 class="page-title">Shadow testing & safe rollouts</h1>
+                    <h1 class="page-title">API & contract automation</h1>
                     <p class="page-subtitle">
-                        Testing new services and algorithms with real traffic, without
-                        impacting users, using shadow pipelines and comparisons.
+                        Service-first testing to protect contracts, speed up backend
+                        changes and reduce integration failures.
                     </p>
 
                     <div class="hero-meta">
-                        <span class="hero-pill">Shadow traffic</span>
-                        <span class="hero-pill">Canary & rollouts</span>
-                        <span class="hero-pill">Production safety nets</span>
+                        <span class="hero-pill">REST / GraphQL</span>
+                        <span class="hero-pill">Contract tests</span>
+                        <span class="hero-pill">CI pipelines</span>
                     </div>
 
                     <div class="hero-actions">
@@ -41,7 +41,7 @@
                             ← Back to projects
                         </a>
                         <a class="btn btn-primary" href="/contact.html">
-                            Discuss shadow testing
+                            Discuss API testing
                         </a>
                     </div>
                 </div>
@@ -50,26 +50,26 @@
                     <div class="hero-card">
                         <div class="hero-card-title">Headline outcome</div>
                         <p>
-                            Caught correctness and performance issues in new services
-                            before they impacted real users or revenue.
+                            Caught breaking API changes before they reached consumers and
+                            treated service contracts as first-class assets.
                         </p>
                     </div>
                     <div class="hero-card">
                         <div class="hero-card-title">Where this was used</div>
                         <p>
-                            Rewrites, new scoring/ranking algorithms, and major changes
-                            to critical back-end services.
+                            Microservice and modular monolith environments with many
+                            downstream consumers (web, mobile, partners).
                         </p>
                     </div>
                 </aside>
             </section>
 
-            <!-- Concept -->
+            <!-- Context -->
             <section class="section">
                 <header class="section-header">
-                    <h2 class="section-title">What is shadow testing in this context?</h2>
+                    <h2 class="section-title">Context & challenges</h2>
                     <p class="section-subtitle">
-                        Running the new system alongside the old one, silently.
+                        “Small” backend changes breaking multiple consumers.
                     </p>
                 </header>
 
@@ -77,28 +77,27 @@
                     <div class="card-body">
                         <ul>
                             <li>
-                                Traffic from production is mirrored to the new service
-                                while the existing service still serves user-visible responses.
+                                APIs evolved quickly, but consumers (web, mobile, partner
+                                systems) were not always updated in sync.
                             </li>
                             <li>
-                                Outputs are stored and compared offline (or in near real-time)
-                                to detect behaviour or performance differences.
+                                Manual testing focused on UI — many contract and data shape
+                                issues only showed up in production.
                             </li>
                             <li>
-                                Rollout only happens once we trust the new service based
-                                on objective metrics and comparisons.
+                                No single place to see which endpoints were covered and by which tests.
                             </li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- Implementation -->
+            <!-- Approach -->
             <section class="section">
                 <header class="section-header">
-                    <h2 class="section-title">Implementation & pipelines</h2>
+                    <h2 class="section-title">Approach & design</h2>
                     <p class="section-subtitle">
-                        Shadow flows that are practical to maintain.
+                        API-first thinking with explicit contracts and test ownership.
                     </p>
                 </header>
 
@@ -106,28 +105,28 @@
                     <div class="card-body">
                         <ul>
                             <li>
-                                Worked with engineering to add request mirroring at the
-                                right place (gateway / load balancer / service level).
+                                Started with an API inventory, aligned it with domain
+                                boundaries and identified critical contracts to protect.
                             </li>
                             <li>
-                                Stored both old and new responses, normalised them and
-                                compared results on key fields and latencies.
+                                Introduced contract testing (e.g. provider/consumer)
+                                between services and key consumers.
                             </li>
                             <li>
-                                Built simple dashboards & reports highlighting mismatch
-                                rates, error types and latency regressions.
+                                Added functional API tests for core business flows
+                                (create/update/read flows, error handling).
                             </li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- Rollout decisions -->
+            <!-- CI & environments -->
             <section class="section">
                 <header class="section-header">
-                    <h2 class="section-title">Rollout & decision-making</h2>
+                    <h2 class="section-title">CI integration & environments</h2>
                     <p class="section-subtitle">
-                        Using data, not gut feeling, to go live.
+                        Make breaking changes visible before they merge or deploy.
                     </p>
                 </header>
 
@@ -135,16 +134,16 @@
                     <div class="card-body">
                         <ul>
                             <li>
-                                Defined acceptable mismatch thresholds and performance
-                                envelopes jointly with product and engineering.
+                                Wired contract tests into CI so schema or behaviour changes
+                                failed fast before affecting other teams.
                             </li>
                             <li>
-                                Used shadow results to decide when to move from 0% to small
-                                canaries (e.g. 1–5% of live traffic).
+                                Used lightweight test environments or mocked dependencies
+                                where full stacks were expensive to spin up.
                             </li>
                             <li>
-                                Kept fast rollback paths in case production behaviour
-                                differed from shadow expectations.
+                                Exposed API test results in dashboards grouped by service,
+                                so service owners could see health at a glance.
                             </li>
                         </ul>
                     </div>
@@ -154,9 +153,9 @@
             <!-- Impact -->
             <section class="section">
                 <header class="section-header">
-                    <h2 class="section-title">Impact & why it matters</h2>
+                    <h2 class="section-title">Impact & repeatable parts</h2>
                     <p class="section-subtitle">
-                        Confidence to ship big backend changes more often.
+                        A pattern for stabilising service ecosystems.
                     </p>
                 </header>
 
@@ -164,21 +163,21 @@
                     <div class="card-body">
                         <ul>
                             <li>
-                                Reduced risk for large rewrites and algorithm changes by
-                                validating on production-like traffic first.
+                                Reduced production incidents tied to API shape/behaviour
+                                mismatches between services and consumers.
                             </li>
                             <li>
-                                Made trade-offs visible: cases where the new service was
-                                faster but occasionally incorrect, or vice-versa.
+                                Backend teams gained confidence to refactor and optimise
+                                with immediate feedback on contract impact.
                             </li>
                             <li>
-                                Teams gained a reusable playbook for “risky but necessary”
-                                changes going forward.
+                                The same pattern can be reused wherever multiple teams
+                                depend on shared APIs.
                             </li>
                         </ul>
                     </div>
                     <div class="card-tags">
-                        <a class="card-tag" href="/contact.html">Design a rollout strategy</a>
+                        <a class="card-tag" href="/contact.html">Apply this to your services</a>
                     </div>
                 </div>
             </section>

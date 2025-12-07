@@ -3,77 +3,211 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Contact — Chetan Maikhuri</title>
     <meta name="description"
-        content="Contact Chetan Maikhuri for opportunities, consulting, or collaboration in Quality Engineering and SDET roles." />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+        content="Contact Chetan Maikhuri — Quality Engineering and SDET Leader. Reach out for roles, consulting, or collaboration." />
     <link rel="stylesheet" href="/assets/css/styles.css" />
-    <script defer src="/assets/js/template.js"></script>
+    <script src="/assets/js/template.js" defer></script>
 </head>
 
 <body>
-    <div id="site-header"></div>
+    <!-- Header injected by template.js -->
+    <header id="site-header"></header>
 
-    <main class="page-shell" aria-labelledby="page-title">
-        <section class="page-hero">
-            <div class="page-hero-text">
-                <div class="page-kicker">
-                    <span class="page-kicker-dot"></span>
-                    <span>Let’s talk</span>
-                </div>
-                <h1 id="page-title" class="page-title">Contact</h1>
-                <p class="page-subtitle">
-                    Prefer email, LinkedIn, or a simple form — whatever’s easiest for
-                    you.
-                </p>
-            </div>
-        </section>
+    <main>
+        <div class="page-shell">
+            <!-- Hero -->
+            <section class="page-hero">
+                <div class="page-hero-text">
+                    <div class="page-kicker">
+                        <span class="page-kicker-dot"></span>
+                        <span>Contact</span>
+                        <span>· Let’s talk</span>
+                    </div>
 
-        <section class="section" aria-labelledby="section-contact-form">
-            <header class="section-header">
-                <h2 id="section-contact-form" class="section-title">Send a message</h2>
-                <p class="section-subtitle">
-                    You can also reach me on LinkedIn if you prefer.
-                </p>
-            </header>
-
-            <form class="contact-form" action="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/formResponse"
-                method="post" target="_blank">
-                <div class="form-row">
-                    <label for="name">Name</label>
-                    <input id="name" name="entry.123456" <!-- replace with your field name -->
-                    type="text"
-                    required
-                    />
-                </div>
-
-                <div class="form-row">
-                    <label for="email">Email</label>
-                    <input id="email" name="entry.234567" <!-- replace with your field name -->
-                    type="email"
-                    required
-                    />
-                </div>
-
-                <div class="form-row">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="entry.345678" <!-- replace with your field name -->
-              rows="4"
-              required
-            ></textarea>
-                    <p class="form-hint">
-                        This form posts to a Google Form; swap the
-                        <code>action</code> and field names with your own IDs.
+                    <h1 class="page-title">Let’s talk about quality, scale and teams</h1>
+                    <p class="page-subtitle">
+                        Whether you’re hiring for a leadership role, need help shaping QA strategy,
+                        or want a second opinion on your quality approach, I’m happy to connect.
                     </p>
+
+                    <div class="hero-meta">
+                        <span class="hero-pill">Quality Engineering leadership</span>
+                        <span class="hero-pill">QA strategy & org design</span>
+                        <span class="hero-pill">Automation & release governance</span>
+                    </div>
+
+                    <div class="hero-actions">
+                        <!-- TODO: Replace with your real email -->
+                        <a class="btn btn-primary" href="mailto:your-email@example.com?subject=Hello%20Chetan">
+                            Email me directly
+                        </a>
+                        <a class="btn btn-outline" href="#contact-form">
+                            Use the contact form
+                        </a>
+                    </div>
                 </div>
 
-                <button class="btn btn-primary" type="submit">Send message</button>
-            </form>
-        </section>
+                <aside class="page-hero-aside">
+                    <div class="hero-card">
+                        <div class="hero-card-title">Typical reasons people reach out</div>
+                        <p>
+                            <strong>· Leadership roles:</strong> Head of QA / Director QE / SDET Lead<br />
+                            <strong>· Consulting:</strong> QA org design, automation roadmap, release governance<br />
+                            <strong>· Advisory:</strong> Short consultations for teams modernising quality.
+                        </p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-title">What to include</div>
+                        <p>
+                            A short note on your context, team size, current quality setup and
+                            what you’d like to improve. I’ll respond with how I can help or
+                            connect you with someone better suited.
+                        </p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- Section: Contact options -->
+            <section class="section">
+                <header class="section-header">
+                    <h2 class="section-title">Contact options</h2>
+                    <p class="section-subtitle">
+                        Use whatever is easiest for you. You can always start with a short note.
+                    </p>
+                </header>
+
+                <div class="section-grid">
+                    <!-- Email -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Email</h3>
+                            <p class="card-meta">Best for detailed context</p>
+                        </div>
+                        <div class="card-body">
+                            <!-- TODO: Replace with your real email address -->
+                            Drop me an email at <strong>your-email@example.com</strong> with a brief
+                            description of what you’re looking for, and I’ll get back with
+                            follow-up questions or next steps.
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn (optional) -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">LinkedIn</h3>
+                            <p class="card-meta">Great for quick intros</p>
+                        </div>
+                        <div class="card-body">
+                            <!-- TODO: Replace # with your actual LinkedIn profile URL -->
+                            You can also send a short message or connection request on LinkedIn
+                            if that’s easier for you.
+                        </div>
+                        <div class="card-tags">
+                            <span class="card-tag">Intros</span>
+                            <span class="card-tag">Networking</span>
+                        </div>
+                    </div>
+
+                    <!-- Calendar / call (optional) -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Short call</h3>
+                            <p class="card-meta">Once we’ve exchanged a couple of messages</p>
+                        </div>
+                        <div class="card-body">
+                            For roles or deeper engagements, I usually suggest a short call
+                            after an initial email so we can align on expectations and context.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Contact form -->
+            <section class="section" id="contact-form">
+                <header class="section-header">
+                    <h2 class="section-title">Send a message</h2>
+                    <p class="section-subtitle">
+                        Use this form to share a quick overview. I’ll reply via email.
+                    </p>
+                </header>
+
+                <!--
+          HOW TO MAKE THIS FORM WORK
+
+          Option A — Formspree (easy for static sites):
+            1. Go to https://formspree.io, create a new form, and copy the endpoint URL.
+            2. Replace the value of the "action" attribute below with your Formspree URL.
+            3. Make sure the "name", "email", and "message" fields stay as they are.
+
+          Option B — Google Forms:
+            1. Create a Google Form with the fields you want.
+            2. Click "Send" → "<>" (Embed) and copy the <iframe> code.
+            3. Comment out or remove the <form> below and paste your <iframe> inside this section.
+        -->
+
+                <form class="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+                    <div class="form-row">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text" autocomplete="name" required />
+                        <p class="form-hint">How should I address you?</p>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" autocomplete="email" required />
+                        <p class="form-hint">I’ll reply to this address.</p>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="topic">What are you looking for?</label>
+                        <input id="topic" name="topic" type="text"
+                            placeholder="Example: Head of QA role, audit of our QA setup, automation roadmap..." />
+                    </div>
+
+                    <div class="form-row">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <p class="form-hint">
+                            Helpful details: team size, product domain, current QA setup, timelines.
+                        </p>
+                    </div>
+
+                    <div class="form-row">
+                        <button class="btn btn-primary" type="submit">
+                            Send message
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Section: Expectations -->
+            <section class="section">
+                <header class="section-header">
+                    <h2 class="section-title">What you can expect</h2>
+                    <p class="section-subtitle">
+                        A clear, honest response — even if I’m not the right fit.
+                    </p>
+                </header>
+
+                <div class="card">
+                    <div class="card-body">
+                        I treat every message as confidential. If I’m not the best person to help,
+                        I’ll say so early and, where possible, point you to a better fit.
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">Straightforward</span>
+                        <span class="card-tag">No spam</span>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <div id="site-footer"></div>
+    <!-- Footer injected by template.js -->
+    <footer id="site-footer"></footer>
 </body>
 
 </html>

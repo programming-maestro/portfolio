@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Web Automation Platform — Projects | Chetan Maikhuri</title>
+    <meta name="description"
+        content="Case study: building a unified web automation platform with stable suites, shared libraries and meaningful release dashboards." />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <script src="/assets/js/template.js" defer></script>
+</head>
+
+<body>
+    <header id="site-header"></header>
+
+    <main>
+        <div class="page-shell">
+            <section class="page-hero">
+                <div class="page-hero-text">
+                    <div class="page-kicker">
+                        <span class="page-kicker-dot"></span>
+                        <span>Projects</span>
+                        <span>· Web automation</span>
+                    </div>
+
+                    <h1 class="page-title">Unified web automation platform</h1>
+                    <p class="page-subtitle">
+                        Consolidating multiple Selenium / Playwright suites into a single,
+                        maintainable platform that teams actually trust for releases.
+                    </p>
+
+                    <div class="hero-meta">
+                        <span class="hero-pill">Multi-product web</span>
+                        <span class="hero-pill">Selenium / Playwright</span>
+                        <span class="hero-pill">Regression & smoke</span>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a class="btn btn-outline" href="/projects/index.html">
+                            ← Back to projects
+                        </a>
+                        <a class="btn btn-primary" href="/contact.html">
+                            Discuss a similar platform
+                        </a>
+                    </div>
+                </div>
+
+                <aside class="page-hero-aside">
+                    <div class="hero-card">
+                        <div class="hero-card-title">Headline outcome</div>
+                        <p>
+                            From days-long, flaky regressions to predictable runs with clear
+                            dashboards for product and engineering leaders.
+                        </p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-title">Where this was used</div>
+                        <p>
+                            E-commerce, content and internal tools — any product with
+                            business-critical web journeys and frequent releases.
+                        </p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- Context -->
+            <section class="section">
+                <header class="section-header">
+                    <h2 class="section-title">Context & challenges</h2>
+                    <p class="section-subtitle">
+                        Multiple teams, multiple frameworks, and regressions nobody wanted to run.
+                    </p>
+                </header>
+
+                <div class="card">
+                    <div class="card-body">
+                        <ul>
+                            <li>
+                                Separate Selenium and Playwright suites existed per product,
+                                each with different conventions and levels of maintenance.
+                            </li>
+                            <li>
+                                Test runs were long and flaky, so teams only ran them for
+                                “big” releases — and incidents still slipped through.
+                            </li>
+                            <li>
+                                No central view of coverage or pass/fail history across
+                                journeys, so leaders couldn’t use results confidently.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Approach -->
+            <section class="section">
+                <header class="section-header">
+                    <h2 class="section-title">Approach & architecture</h2>
+                    <p class="section-subtitle">
+                        Treat automation as a product, not a by-product.
+                    </p>
+                </header>
+
+                <div class="card">
+                    <div class="card-body">
+                        <ul>
+                            <li>
+                                Defined <strong>golden journeys</strong> for web — sign-up, login,
+                                search, cart, checkout, key forms — as the backbone.
+                            </li>
+                            <li>
+                                Standardised a single automation stack with shared page objects,
+                                helpers and patterns across squads.
+                            </li>
+                            <li>
+                                Introduced tiers of suites (smoke, sanity, full regression)
+                                mapped to CI stages and environments.
+                            </li>
+                            <li>
+                                Added tags (e.g. <code>@payments</code>, <code>@critical</code>) to
+                                enable targeted runs when only certain modules changed.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tooling & CI -->
+            <section class="section">
+                <header class="section-header">
+                    <h2 class="section-title">Tooling, CI and reporting</h2>
+                    <p class="section-subtitle">
+                        Making it visible, fast and reliable enough for engineers to care.
+                    </p>
+                </header>
+
+                <div class="card">
+                    <div class="card-body">
+                        <ul>
+                            <li>
+                                Integrated smoke suites into pull-request checks, with
+                                regression runs on main branches and pre-prod.
+                            </li>
+                            <li>
+                                Added retry logic & smart waits to sensitive flows without
+                                hiding genuine issues.
+                            </li>
+                            <li>
+                                Pushed results into dashboards (trend of pass rate, duration,
+                                flaky tests) that were reviewed in stand-ups.
+                            </li>
+                            <li>
+                                Introduced a simple “test ownership” model — each critical
+                                journey had a clear squad owning its stability.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Impact -->
+            <section class="section">
+                <header class="section-header">
+                    <h2 class="section-title">Impact & what I’d repeat</h2>
+                    <p class="section-subtitle">
+                        Pragmatic automation that teams actually use and improve.
+                    </p>
+                </header>
+
+                <div class="card">
+                    <div class="card-body">
+                        <ul>
+                            <li>
+                                Regression became a standard part of the release pipeline,
+                                rather than a manual, “best effort” checklist.
+                            </li>
+                            <li>
+                                Teams gained confidence to ship more frequently because
+                                critical web journeys were always covered.
+                            </li>
+                            <li>
+                                New products plugged into the platform instead of starting
+                                from scratch, shortening time-to-automation.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-tags">
+                        <a class="card-tag" href="/contact.html">Apply this pattern to your web stack</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer id="site-footer"></footer>
+</body>
+
+</html>

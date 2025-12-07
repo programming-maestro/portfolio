@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Shadow Testing & Safe Rollouts — Projects | Chetan Maikhuri</title>
+    <title>Performance & Scalability Testing — Projects | Chetan Maikhuri</title>
     <meta name="description"
-        content="Case study: using shadow testing and safe rollout patterns to validate new services against real traffic before full launch." />
+        content="Case study: defining a performance and scalability testing practice with realistic scenarios, SLOs and pre-release checks." />
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <script src="/assets/js/template.js" defer></script>
 </head>
@@ -21,19 +21,19 @@
                     <div class="page-kicker">
                         <span class="page-kicker-dot"></span>
                         <span>Projects</span>
-                        <span>· Shadow testing</span>
+                        <span>· Performance testing</span>
                     </div>
 
-                    <h1 class="page-title">Shadow testing & safe rollouts</h1>
+                    <h1 class="page-title">Performance & scalability testing</h1>
                     <p class="page-subtitle">
-                        Testing new services and algorithms with real traffic, without
-                        impacting users, using shadow pipelines and comparisons.
+                        Moving from one-off load tests to a structured performance
+                        practice aligned with business SLAs and peak events.
                     </p>
 
                     <div class="hero-meta">
-                        <span class="hero-pill">Shadow traffic</span>
-                        <span class="hero-pill">Canary & rollouts</span>
-                        <span class="hero-pill">Production safety nets</span>
+                        <span class="hero-pill">Load & stress</span>
+                        <span class="hero-pill">SLOs / SLAs</span>
+                        <span class="hero-pill">Peak readiness</span>
                     </div>
 
                     <div class="hero-actions">
@@ -41,7 +41,7 @@
                             ← Back to projects
                         </a>
                         <a class="btn btn-primary" href="/contact.html">
-                            Discuss shadow testing
+                            Discuss performance strategy
                         </a>
                     </div>
                 </div>
@@ -50,26 +50,26 @@
                     <div class="hero-card">
                         <div class="hero-card-title">Headline outcome</div>
                         <p>
-                            Caught correctness and performance issues in new services
-                            before they impacted real users or revenue.
+                            Predictable performance under expected load and safer changes
+                            thanks to repeatable performance checks.
                         </p>
                     </div>
                     <div class="hero-card">
                         <div class="hero-card-title">Where this was used</div>
                         <p>
-                            Rewrites, new scoring/ranking algorithms, and major changes
-                            to critical back-end services.
+                            Retail, payments and content platforms with strong seasonality
+                            (sales events, campaigns, traffic spikes).
                         </p>
                     </div>
                 </aside>
             </section>
 
-            <!-- Concept -->
+            <!-- Strategy -->
             <section class="section">
                 <header class="section-header">
-                    <h2 class="section-title">What is shadow testing in this context?</h2>
+                    <h2 class="section-title">Strategy & objectives</h2>
                     <p class="section-subtitle">
-                        Running the new system alongside the old one, silently.
+                        Start with business expectations, not just tool configuration.
                     </p>
                 </header>
 
@@ -77,28 +77,28 @@
                     <div class="card-body">
                         <ul>
                             <li>
-                                Traffic from production is mirrored to the new service
-                                while the existing service still serves user-visible responses.
+                                Defined performance objectives with product and engineering:
+                                what fast enough means and where.
                             </li>
                             <li>
-                                Outputs are stored and compared offline (or in near real-time)
-                                to detect behaviour or performance differences.
+                                Identified critical flows and components (search, checkout,
+                                APIs) to focus effort instead of testing “everything”.
                             </li>
                             <li>
-                                Rollout only happens once we trust the new service based
-                                on objective metrics and comparisons.
+                                Agreed on metrics (latency, throughput, error rate) and SLOs
+                                that mattered to both tech and business stakeholders.
                             </li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- Implementation -->
+            <!-- Scenarios & tooling -->
             <section class="section">
                 <header class="section-header">
-                    <h2 class="section-title">Implementation & pipelines</h2>
+                    <h2 class="section-title">Scenarios, tooling & environment</h2>
                     <p class="section-subtitle">
-                        Shadow flows that are practical to maintain.
+                        Practical performance testing that fits into real release cycles.
                     </p>
                 </header>
 
@@ -106,28 +106,28 @@
                     <div class="card-body">
                         <ul>
                             <li>
-                                Worked with engineering to add request mirroring at the
-                                right place (gateway / load balancer / service level).
+                                Designed load, stress and soak scenarios based on historical
+                                traffic patterns and expected growth.
                             </li>
                             <li>
-                                Stored both old and new responses, normalised them and
-                                compared results on key fields and latencies.
+                                Used suitable tooling (e.g. JMeter / k6 / Gatling style tools)
+                                depending on stacks and team skills.
                             </li>
                             <li>
-                                Built simple dashboards & reports highlighting mismatch
-                                rates, error types and latency regressions.
+                                Worked with DevOps to provision realistic, isolated environments
+                                for regular performance runs where possible.
                             </li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- Rollout decisions -->
+            <!-- Integration & reporting -->
             <section class="section">
                 <header class="section-header">
-                    <h2 class="section-title">Rollout & decision-making</h2>
+                    <h2 class="section-title">Integration into release process</h2>
                     <p class="section-subtitle">
-                        Using data, not gut feeling, to go live.
+                        Making performance checks a habit, not an afterthought.
                     </p>
                 </header>
 
@@ -135,16 +135,16 @@
                     <div class="card-body">
                         <ul>
                             <li>
-                                Defined acceptable mismatch thresholds and performance
-                                envelopes jointly with product and engineering.
+                                Scheduled regular performance runs ahead of big campaigns or
+                                feature launches with clear pass/fail criteria.
                             </li>
                             <li>
-                                Used shadow results to decide when to move from 0% to small
-                                canaries (e.g. 1–5% of live traffic).
+                                Shared reports focused on decision-making: “can we launch?”,
+                                not just graphs of response times.
                             </li>
                             <li>
-                                Kept fast rollback paths in case production behaviour
-                                differed from shadow expectations.
+                                Created feedback loops so findings informed architecture,
+                                caching and scaling decisions.
                             </li>
                         </ul>
                     </div>
@@ -154,9 +154,9 @@
             <!-- Impact -->
             <section class="section">
                 <header class="section-header">
-                    <h2 class="section-title">Impact & why it matters</h2>
+                    <h2 class="section-title">Impact & reuse</h2>
                     <p class="section-subtitle">
-                        Confidence to ship big backend changes more often.
+                        A pattern for making performance part of normal quality.
                     </p>
                 </header>
 
@@ -164,21 +164,21 @@
                     <div class="card-body">
                         <ul>
                             <li>
-                                Reduced risk for large rewrites and algorithm changes by
-                                validating on production-like traffic first.
+                                Improved stability during peak events and reduced surprises
+                                like timeouts or cascading failures.
                             </li>
                             <li>
-                                Made trade-offs visible: cases where the new service was
-                                faster but occasionally incorrect, or vice-versa.
+                                Teams had a clearer picture of how close they were to limits,
+                                enabling smarter scaling and cost decisions.
                             </li>
                             <li>
-                                Teams gained a reusable playbook for “risky but necessary”
-                                changes going forward.
+                                The same model (objectives → scenarios → runs → decisions)
+                                can be applied to any new product line.
                             </li>
                         </ul>
                     </div>
                     <div class="card-tags">
-                        <a class="card-tag" href="/contact.html">Design a rollout strategy</a>
+                        <a class="card-tag" href="/contact.html">Design a performance plan</a>
                     </div>
                 </div>
             </section>
