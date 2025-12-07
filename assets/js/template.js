@@ -45,59 +45,76 @@
       { href: "/contact.html", label: "Contact", pill: "Say hi" },
     ];
 
+    // Normalise the current path once
+    const currentCleanPath = window.location.pathname.replace(/\/$/, "");
+
     const navLinks = NAV_ITEMS.map((item) => {
-      // crude active detection – checks current path ends with the item path
-      const isActive =
-        CURRENT_PATH === item.href ||
-        CURRENT_PATH.endsWith(item.href.replace(/^\//, ""));
+      const cleanItemHref = item.href.replace(/\/$/, "");
+
+      // base active check: exact match
+      let isActive = currentCleanPath === cleanItemHref;
+
+      // ⭐ Optional enhancement:
+      // Treat "/" (root) as /index.html so Home is active there too
+      if (
+        (currentCleanPath === "" || currentCleanPath === "/") &&
+        item.href === "/index.html"
+      ) {
+        isActive = true;
+      }
 
       return `
-        <a href="${item.href}" class="${isActive ? "is-active" : ""}">
-          <span class="label">${item.label}</span>
-          <span class="pill">${item.pill}</span>
-        </a>
-      `;
+      <a href="${item.href}" class="${isActive ? "is-active" : ""}">
+        <span class="label">${item.label}</span>
+        <span class="pill">${item.pill}</span>
+      </a>
+    `;
     }).join("");
 
     return `
-      <header class="site-header">
-        <div class="site-header-inner">
-          <a href="/index.html" class="brand">
-            <div class="brand-avatar">CM</div>
-            <div class="brand-text">
-              <span class="brand-name">Chetan Maikhuri</span>
-              <span class="brand-tagline">Quality Engineering · SDET · Leader</span>
-            </div>
-          </a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a href="/index.html" class="brand">
+          <span class="brand-avatar">CM</span>
+          <span class="brand-text">
+            <span class="brand-name">Chetan Maikhuri</span>
+            <span class="brand-tagline">
+              Quality Engineering · SDET · Leader
+            </span>
+          </span>
+        </a>
 
-          <nav class="site-nav" aria-label="Primary navigation">
-            <div class="site-nav-links">
-              <div class="nav-menu">
-                <div class="nav-menu-inner">
-                  ${navLinks}
-                </div>
-              </div>
-            </div>
+        <nav class="site-nav">
+          <!-- Keep this wrapper for layout, but no links here to avoid duplicates -->
+          <div class="site-nav-links"></div>
 
-            <button class="theme-toggle" type="button" data-role="theme-toggle">
-              <span class="theme-toggle-icon" data-role="theme-icon">☀️</span>
-              <span data-role="theme-label">Light</span>
-            </button>
+          <button
+            class="theme-toggle"
+            type="button"
+            data-role="theme-toggle"
+          >
+            <span class="theme-toggle-icon" data-role="theme-icon">☀️</span>
+            <span data-role="theme-label">Light</span>
+          </button>
 
-            <button class="nav-toggle" type="button" aria-label="Toggle navigation" data-role="nav-toggle">
-              <span></span>
-            </button>
-          </nav>
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-label="Toggle navigation"
+            data-role="nav-toggle"
+          >
+            <span></span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="nav-menu" data-role="nav-menu">
+        <div class="nav-menu-inner">
+          ${navLinks}
         </div>
-
-        <!-- Mobile nav menu (re-uses same links) -->
-        <div class="nav-menu" data-role="nav-menu">
-          <div class="nav-menu-inner">
-            ${navLinks}
-          </div>
-        </div>
-      </header>
-    `;
+      </div>
+    </header>
+  `;
   }
 
   function buildFooter() {
@@ -126,6 +143,7 @@
     // After injecting, wire up interactivity
     setupThemeToggle();
     setupNavToggle();
+    setupHeaderScroll();
   }
 
   // -----------------------------
@@ -163,6 +181,29 @@
         menu.classList.remove("is-open");
       }
     });
+  }
+
+  function setupHeaderScroll() {
+    const header = document.querySelector(".site-header");
+    if (!header) return;
+
+    const SCROLLED_CLASS = "site-header--scrolled";
+
+    function handleScroll() {
+      const offset = window.scrollY || window.pageYOffset || 0;
+
+      if (offset > 16) {
+        header.classList.add(SCROLLED_CLASS);
+      } else {
+        header.classList.remove(SCROLLED_CLASS);
+      }
+    }
+
+    // Run once on load in case user refreshes mid-page
+    handleScroll();
+
+    // Listen to scroll – passive for better performance
+    window.addEventListener("scroll", handleScroll, { passive: true });
   }
 
   // -----------------------------

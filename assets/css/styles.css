@@ -1,6 +1,6 @@
-/* ================================
-   Global variables & theme
-   ================================ */
+/* =========================================
+   1. Global design tokens & theme
+   ========================================= */
 
 :root {
   /* Colors – light theme defaults */
@@ -12,16 +12,23 @@
   --color-accent: #2563eb;
   --color-accent-soft: rgba(37, 99, 235, 0.1);
   --color-border: #e5e7eb;
-  --color-nav-bg: rgba(247, 247, 251, 0.9);
+
+  /* Header/navigation background (opaque to avoid transparency issues) */
+  --color-nav-bg: #f8fafc;
+
+  /* Shadows */
   --shadow-soft: 0 8px 24px rgba(15, 23, 42, 0.08);
 
+  /* Radii */
   --radius-lg: 1.25rem;
   --radius-md: 0.75rem;
   --radius-pill: 999px;
 
+  /* Typography */
   --font-sans:
     system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
+  /* Transitions */
   --transition-fast: 150ms ease-out;
   --transition-med: 220ms ease-out;
 
@@ -29,9 +36,15 @@
   --page-max-width: 1080px;
   --page-padding-x: 1.25rem;
   --page-padding-y: 1.5rem;
+
+  /* Fixed header height – keep in sync with actual header size */
+  --cm-header-height: 80px;
+
+  /* Theme-aware page background (used by <body>) */
+  --page-background: radial-gradient(circle at top, #e0edff 0, #f7f7fb 45%);
 }
 
-/* Dark theme – toggled with [data-theme="dark"] on <html>  */
+/* Explicit dark theme via data-theme attribute */
 html[data-theme="dark"] {
   --color-bg: #020617;
   --color-surface: #020617;
@@ -41,11 +54,22 @@ html[data-theme="dark"] {
   --color-accent: #60a5fa;
   --color-accent-soft: rgba(96, 165, 250, 0.12);
   --color-border: #1f2937;
-  --color-nav-bg: rgba(2, 6, 23, 0.9);
+  --color-nav-bg: #020617;
   --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.7);
+
+  /* Softer, subtle dark gradient background */
+  --page-background:
+    radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.1), transparent 55%),
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(139, 92, 246, 0.08),
+      transparent 60%
+    ),
+    #020617;
 }
 
-/* Respect system preference on first load if no explicit theme */
+/* Respect system preference on first load if no explicit theme chosen.
+   This avoids the "light flash then dark" issue for dark-mode users. */
 @media (prefers-color-scheme: dark) {
   html:not([data-theme]) {
     --color-bg: #020617;
@@ -56,14 +80,27 @@ html[data-theme="dark"] {
     --color-accent: #60a5fa;
     --color-accent-soft: rgba(96, 165, 250, 0.12);
     --color-border: #1f2937;
-    --color-nav-bg: rgba(2, 6, 23, 0.9);
+    --color-nav-bg: #020617;
     --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.7);
+
+    --page-background:
+      radial-gradient(
+        circle at 0% 0%,
+        rgba(56, 189, 248, 0.1),
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 100% 0%,
+        rgba(139, 92, 246, 0.08),
+        transparent 60%
+      ),
+      #020617;
   }
 }
 
-/* ================================
-   Global reset / base
-   ================================ */
+/* =========================================
+   2. Global reset / base
+   ========================================= */
 
 *,
 *::before,
@@ -77,12 +114,16 @@ body {
   padding: 0;
 }
 
+/* Main body setup – includes space for fixed header */
 body {
   min-height: 100vh;
   font-family: var(--font-sans);
-  background: radial-gradient(circle at top, #e0edff 0, var(--color-bg) 45%);
+  background: var(--page-background);
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
+
+  /* Reserve space so fixed header doesn't overlap content */
+  padding-top: var(--cm-header-height);
 }
 
 img {
@@ -99,24 +140,35 @@ main {
   display: block;
 }
 
-/* Container utility */
+/* Main page container */
 .page-shell {
   max-width: var(--page-max-width);
   margin: 0 auto;
   padding: var(--page-padding-y) var(--page-padding-x) 3.5rem;
 }
 
-/* ================================
-   Top navigation / header
-   ================================ */
+/* =========================================
+   3. Top navigation / header
+   ========================================= */
 
+/* Fixed header that stays on top across scroll */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 40;
-  backdrop-filter: blur(16px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  width: 100%;
+
   background: var(--color-nav-bg);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.18);
+
+  /* For subtle scroll animation */
+  transition:
+    transform var(--transition-med),
+    box-shadow var(--transition-med),
+    background var(--transition-med);
 }
 
 .site-header-inner {
@@ -166,14 +218,19 @@ main {
   color: var(--color-text-muted);
 }
 
-/* Nav */
+/* Nav container */
 .site-nav {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-/* Mobile menu button */
+/* Wrapper for inline links – currently empty (all links live in .nav-menu) */
+.site-nav-links {
+  display: none;
+}
+
+/* Mobile menu button (hamburger) */
 .nav-toggle {
   display: inline-flex;
   align-items: center;
@@ -239,10 +296,14 @@ main {
   opacity: 0;
 }
 
-/* Nav menu */
+/* Nav menu – shared for mobile + desktop.
+   Mobile: fixed overlay under header.
+   Desktop: becomes inline via media query. */
 .nav-menu {
   position: fixed;
-  inset: 56px 0 auto 0;
+  top: var(--cm-header-height);
+  left: 0;
+  right: 0;
   background: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
   transform: translateY(-100%);
@@ -291,7 +352,7 @@ main {
   color: var(--color-text);
 }
 
-/* Open state */
+/* Open state (mobile) */
 .nav-menu.is-open {
   transform: translateY(0);
   opacity: 1;
@@ -330,14 +391,21 @@ main {
   outline-offset: 2px;
 }
 
-/* Hide nav links inline on mobile */
-.site-nav-links {
-  display: none;
+/* Subtle header animation on scroll */
+.site-header--scrolled {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.28);
 }
 
-/* ================================
-   Hero / page header section
-   ================================ */
+/* Slightly tighter padding when scrolled to feel “compressed” */
+.site-header--scrolled .site-header-inner {
+  padding-top: 0.45rem;
+  padding-bottom: 0.45rem;
+}
+
+/* =========================================
+   4. Hero / page header section
+   ========================================= */
 
 .page-hero {
   margin-top: 1.25rem;
@@ -474,9 +542,9 @@ main {
   margin-bottom: 0.15rem;
 }
 
-/* ================================
-   Generic sections / cards
-   ================================ */
+/* =========================================
+   5. Generic sections / cards
+   ========================================= */
 
 .section {
   margin-top: 2.2rem;
@@ -563,9 +631,9 @@ main {
   color: var(--color-accent);
 }
 
-/* ================================
-   Contact form
-   ================================ */
+/* =========================================
+   6. Contact form
+   ========================================= */
 
 .contact-form {
   margin-top: 1.2rem;
@@ -615,9 +683,9 @@ main {
   color: var(--color-text-muted);
 }
 
-/* ================================
-   Footer
-   ================================ */
+/* =========================================
+   7. Footer
+   ========================================= */
 
 .site-footer {
   border-top: 1px solid rgba(148, 163, 184, 0.35);
@@ -645,9 +713,9 @@ main {
   gap: 0.6rem;
 }
 
-/* ================================
-   Responsive breakpoints
-   ================================ */
+/* =========================================
+   8. Responsive breakpoints
+   ========================================= */
 
 @media (min-width: 640px) {
   .page-hero {
@@ -682,7 +750,9 @@ main {
     padding-block: 0.8rem;
   }
 
-  /* Desktop nav: show inline links, hide mobile menu */
+  /* Desktop nav:
+     - Hamburger hidden
+     - Nav menu always visible and inline under header */
   .nav-toggle {
     display: none;
   }
@@ -701,11 +771,6 @@ main {
     flex-direction: row;
   }
 
-  .site-nav-links {
-    display: flex;
-    gap: 0.25rem;
-  }
-
   .nav-menu a {
     padding-inline: 0.7rem;
     font-size: 0.8rem;
@@ -713,6 +778,12 @@ main {
 
   .theme-toggle {
     font-size: 0.78rem;
+  }
+
+  /* Scroll state padding tweak (desktop) */
+  .site-header--scrolled .site-header-inner {
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
   }
 }
 
@@ -737,4 +808,30 @@ main {
   .page-shell {
     padding-inline: 0;
   }
+}
+
+/* =========================================
+   CTA buttons in main content (View all / View roles / Contact me)
+   Keep labels single-line and visually consistent on mobile
+   ========================================= */
+
+main a[href$="projects/index.html"],
+main a[href$="/projects"],
+main a[href$="companies/index.html"],
+main a[href$="/companies"],
+main a[href$="contact.html"],
+main a[href$="/contact"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Keep text on one line */
+  white-space: nowrap;
+
+  /* Make their widths feel consistent */
+  min-width: 9.5rem; /* increase to 10rem or 11rem if you still see wrapping */
+  padding-inline: 1.1rem; /* mild extra breathing room */
+
+  /* Inherit your existing button style (border, background, etc.),
+     so we only control sizing/behavior, not colors. */
 }
