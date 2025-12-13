@@ -79,7 +79,7 @@
           <span class="brand-text">
             <span class="brand-name">Chetan Maikhuri</span>
             <span class="brand-tagline">
-              Quality Engineering · SDET · Leader
+              Software Quality Engineering Leader
             </span>
           </span>
         </a>

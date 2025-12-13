@@ -7,8 +7,11 @@
     <title>Contact — Chetan Maikhuri</title>
     <meta name="description"
         content="Contact Chetan Maikhuri — Quality Engineering and SDET Leader. Reach out for roles, consulting, or collaboration." />
+
+
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <script src="/assets/js/template.js" defer></script>
+    console.log(window.location.origin);
 </head>
 
 <body>
@@ -87,29 +90,30 @@
                             <p class="card-meta">Best for detailed context</p>
                         </div>
                         <div class="card-body">
-                            <!-- TODO: Replace with your real email address -->
-                            Drop me an email at <strong>your-email@example.com</strong> with a brief
+                            Drop me an email at <strong>csm@outlook.in</strong> with a brief
                             description of what you’re looking for, and I’ll get back with
                             follow-up questions or next steps.
                         </div>
                     </div>
 
                     <!-- LinkedIn (optional) -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">LinkedIn</h3>
-                            <p class="card-meta">Great for quick intros</p>
+                    <a href="https://www.linkedin.com/in/cm6" target="_blank">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">LinkedIn</h3>
+                                <p class="card-meta">Great for quick intros</p>
+                            </div>
+                            <div class="card-body">
+                                <!-- TODO: Replace # with your actual LinkedIn profile URL -->
+                                You can also follow me or send a connect request with a short message on LinkedIn
+                                if that’s easier for you.
+                            </div>
+                            <div class="card-tags">
+                                <span class="card-tag">Intros</span>
+                                <span class="card-tag">Networking</span>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <!-- TODO: Replace # with your actual LinkedIn profile URL -->
-                            You can also send a short message or connection request on LinkedIn
-                            if that’s easier for you.
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag">Intros</span>
-                            <span class="card-tag">Networking</span>
-                        </div>
-                    </div>
+                    </a>
 
                     <!-- Calendar / call (optional) -->
                     <div class="card">
@@ -147,8 +151,16 @@
             2. Click "Send" → "<>" (Embed) and copy the <iframe> code.
             3. Comment out or remove the <form> below and paste your <iframe> inside this section.
         -->
+                <form class="contact-form" id="contactForm">
 
-                <form class="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+                    <!-- <form class="contact-form" action="https://formspree.io/f/xpwvbbpl" method="POST"> -->
+                    <!-- onsubmit="setRedirect()"> -->
+                    <!-- <input type="hidden" name="source" value="chetan-maikhuri-website">
+                    <input type="hidden" name="_subject" value="New Contact from Website">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="text" name="_gotcha" style="display:none">
+                    <input type="hidden" name="_redirect" value="/thank-you.html"> -->
+
                     <div class="form-row">
                         <label for="name">Name</label>
                         <input id="name" name="name" type="text" autocomplete="name" required />
@@ -209,5 +221,50 @@
     <!-- Footer injected by template.js -->
     <footer id="site-footer"></footer>
 </body>
+<!-- Formspree.io -->
+<!-- https://formspree.io/forms/xpwvbbpl/overview -->
+<script>
+    function setRedirect() {
+        const form = document.querySelector('.contact-form');
+
+        // Avoid adding duplicate redirect inputs
+        if (!form.querySelector('input[name="_redirect"]')) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = '_redirect';
+            input.value = window.location.origin + '/thank-you.html';
+            form.appendChild(input);
+        }
+    }
+</script>
+<!-- Google Form -->
+<!-- link: https://forms.gle/UXjnkeEZzNWBmCXC6 -->
+
+<script>
+    const form = document.getElementById("contactForm");
+
+    const GOOGLE_FORM_ACTION =
+        "https://docs.google.com/forms/d/e/1FAIpQLSdK1c0fWCDtIRRh1Bcq4cKdO7QeG87mrJZDhVIhctFpXRQ7Xg/formResponse";
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData();
+
+        formData.append("entry.1965067803", document.getElementById("name").value);
+        formData.append("entry.823555841", document.getElementById("email").value);
+        formData.append("entry.1357665512", document.getElementById("topic").value);
+        formData.append("entry.2102819388", document.getElementById("message").value);
+
+        fetch(GOOGLE_FORM_ACTION, {
+            method: "POST",
+            body: formData,
+            mode: "no-cors",
+        }).then(() => {
+            window.location.href = window.location.origin + "/thank-you.html";
+        });
+    });
+</script>
+
 
 </html>
