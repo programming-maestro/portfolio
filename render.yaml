@@ -1,0 +1,13 @@
+# Exported from Render on 2025-12-14T21:33:45Z
+version: "1"
+projects:
+- name: CSM_R&D
+  environments:
+  - name: Production
+    services:
+    - type: web
+      name: chetan-maikhuri
+      runtime: static
+      repo: https://github.com/programming-maestro/portfolio
+      staticPublishPath: .
+      autoDeployTrigger: commit
