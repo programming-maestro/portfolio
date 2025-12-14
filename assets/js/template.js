@@ -124,7 +124,7 @@
         <div class="site-footer-inner">
           <div>© ${year} Chetan Maikhuri. All rights reserved.</div>
           <div class="footer-links">
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/cm6" target="_blank" rel="noopener">LinkedIn</a>
             <a href="https://github.com/programming-maestro" target="_blank" rel="noopener">GitHub</a>
             <a href="/contact.html">Contact</a>
           </div>

@@ -835,3 +835,147 @@ main a[href$="/contact"] {
   /* Inherit your existing button style (border, background, etc.),
      so we only control sizing/behavior, not colors. */
 }
+
+/* Contact Form */
+.email-fallback p {
+  margin: 8px 0;
+}
+
+.btn-small {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+/* ================================
+   Copy Email Toast
+================================ */
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #111827;
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Email fallback (contact page) */
+.email-fallback {
+  margin-top: 16px;
+}
+
+.card-muted {
+  background: var(--color-surface-alt);
+  border: 1px dashed var(--border-muted);
+}
+
+.fallback-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.fallback-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+/* Email fallback close icon */
+.email-fallback {
+  position: relative;
+}
+
+.fallback-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+
+  color: var(--color-text-muted);
+}
+
+.fallback-close:hover {
+  color: var(--color-text);
+}
+
+#emailFallback {
+  position: relative; /* Ensure the container div is the reference point for positioning */
+}
+
+#closeFallback {
+  position: absolute;
+  top: 10px; /* Distance from the top of the container */
+  right: 10px; /* Distance from the right edge of the container */
+  background: transparent; /* Remove button background */
+  border: none; /* Remove border */
+  font-size: 16px; /* Adjust size of the cross icon */
+  cursor: pointer; /* Pointer cursor to indicate it's clickable */
+  padding: 5px; /* Add some padding to make the button area larger */
+}
+
+#closeFallback:hover {
+  color: #ff0000; /* Optional: change the icon color on hover */
+}
+/* Make sure the fallback container has relative positioning */
+#emailFallback {
+  position: relative; /* Ensure the container div is the reference point for positioning */
+}
+
+/* Close button styles */
+#closeFallback {
+  position: absolute;
+  top: 10px; /* Distance from the top of the container */
+  right: 10px; /* Distance from the right edge of the container */
+  background: transparent; /* Remove button background */
+  border: none; /* Remove border */
+  font-size: 16px; /* Adjust size of the cross icon */
+  cursor: pointer; /* Pointer cursor to indicate it's clickable */
+  padding: 5px; /* Add some padding to make the button area larger */
+}
+
+/* Hover effect for the close button */
+#closeFallback:hover {
+  color: #ff0000; /* Optional: change the icon color on hover */
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+  /* Adjust the close button for smaller screens */
+  #closeFallback {
+    top: 5px; /* Reduce space from the top */
+    right: 5px; /* Reduce space from the right */
+    font-size: 14px; /* Make the icon smaller on mobile */
+  }
+
+  /* Ensure fallback div has enough padding on mobile */
+  #emailFallback {
+    padding: 10px;
+  }
+}

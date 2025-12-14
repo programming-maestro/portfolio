@@ -1,0 +1,24 @@
+/* ================================
+   PROJECTS & COMPANIES
+================================ */
+
+.section-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.card-meta {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}

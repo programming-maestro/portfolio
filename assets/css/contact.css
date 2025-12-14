@@ -1,0 +1,48 @@
+/* ================================
+   CONTACT PAGE
+================================ */
+
+.contact-form {
+  margin-top: 1.2rem;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.7rem;
+}
+
+.form-row input,
+.form-row textarea {
+  font-family: inherit;
+  padding: 0.5rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--color-border);
+}
+
+/* Email fallback */
+
+.email-fallback {
+  margin-top: 16px;
+  position: relative;
+}
+
+.card-muted {
+  background: var(--color-surface-alt);
+  border: 1px dashed var(--color-border);
+}
+
+#closeFallback {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}

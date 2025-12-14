@@ -11,7 +11,6 @@
 
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <script src="/assets/js/template.js" defer></script>
-    console.log(window.location.origin);
 </head>
 
 <body>
@@ -42,15 +41,47 @@
                     </div>
 
                     <div class="hero-actions">
-                        <!-- TODO: Replace with your real email -->
-                        <a class="btn btn-primary" href="mailto:your-email@example.com?subject=Hello%20Chetan">
+                        <a class="btn btn-primary" href="mailto:csm@outlook.in" id="emailTrigger">
                             Email me directly
                         </a>
+
                         <a class="btn btn-outline" href="#contact-form">
                             Use the contact form
                         </a>
                     </div>
+
+                    <div class="email-fallback card card-muted" id="emailFallback" style="display:none;">
+                        <!-- <button class="fallback-close" type="button" aria-label="Close" onclick="closeEmailFallback()"> -->
+                        <!-- <div class="card-body"> -->
+                        <button type="button" id="closeFallback" class="btn btn-outline btn-small"
+                            onclick="closeEmailFallback()" aria-label="Close">
+                            ×
+                        </button>
+
+                        <div class="card-body">
+                            <p class="card-meta">
+                                If your email app doesn’t open, you can still reach me using one of the options
+                                below.
+                            </p>
+
+                            <div class="fallback-actions">
+                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=csm@outlook.in&su=Hello%20Chetan"
+                                    target="_blank" rel="noopener" class="btn btn-primary btn-small">
+                                    Open Gmail in browser
+                                </a>
+
+                                <div class="fallback-inline">
+                                    <span class="text-muted">Or email me at</span>
+                                    <strong id="emailText">csm@outlook.in</strong>
+                                    <button class="btn btn-outline btn-small" type="button" onclick="copyEmail()">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!-- </div> -->
 
                 <aside class="page-hero-aside">
                     <div class="hero-card">
@@ -84,17 +115,24 @@
 
                 <div class="section-grid">
                     <!-- Email -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Email</h3>
-                            <p class="card-meta">Best for detailed context</p>
+                    <a href="#" onclick="copyEmail(); return false;">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Email</h3>
+                                <p class="card-meta">Best for detailed context</p>
+                            </div>
+                            <div class="card-body">
+                                Drop me an email at <strong>csm@outlook.in</strong>
+                                <!-- <button class="btn btn-outline btn-small" type="button">
+                                    Copy email
+                                </button>  -->
+                                with a brief
+                                description of what you’re looking for, and I’ll get back with
+                                follow-up questions or next steps.
+                            </div>
                         </div>
-                        <div class="card-body">
-                            Drop me an email at <strong>csm@outlook.in</strong> with a brief
-                            description of what you’re looking for, and I’ll get back with
-                            follow-up questions or next steps.
-                        </div>
-                    </div>
+                    </a>
+
 
                     <!-- LinkedIn (optional) -->
                     <a href="https://www.linkedin.com/in/cm6" target="_blank">
@@ -218,6 +256,8 @@
         </div>
     </main>
 
+    <!-- Toast Message  -->
+    <div id="copy-toast" class="toast">Email copied ✔</div>
     <!-- Footer injected by template.js -->
     <footer id="site-footer"></footer>
 </body>
@@ -265,6 +305,68 @@
         });
     });
 </script>
+
+<!-- Email -->
+<script>
+    const emailTrigger = document.getElementById("emailTrigger");
+    const emailFallback = document.getElementById("emailFallback");
+
+    if (emailTrigger) {
+        emailTrigger.addEventListener("click", () => {
+            // If mail app doesn't open, show fallback after short delay
+            setTimeout(() => {
+                emailFallback.style.display = "block";
+            }, 700);
+        });
+    }
+
+    function copyEmail() {
+        const email = "csm@outlook.in";
+        navigator.clipboard.writeText(email).then(() => {
+            alert("Email address copied to clipboard");
+        });
+    }
+</script>
+<script>
+    function copyEmail() {
+        const email = "csm@outlook.in";
+        const toast = document.getElementById("copy-toast");
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(email).then(showToast);
+        } else {
+            // Fallback for local / older browsers
+            const input = document.createElement("textarea");
+            input.value = email;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand("copy");
+            document.body.removeChild(input);
+            showToast();
+        }
+
+        function showToast() {
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2000);
+        }
+    }
+    document.getElementById("closeFallback").addEventListener("click", function () {
+        document.getElementById("emailFallback").style.display = "none";
+    });
+</script>
+
+<!-- Close icon handler -->
+<script>
+    function closeEmailFallback() {
+        const fallback = document.getElementById("emailFallback");
+        if (fallback) {
+            fallback.style.display = "none";
+        }
+    }
+</script>
+
 
 
 </html>

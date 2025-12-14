@@ -1,0 +1,62 @@
+/* ================================
+   HOME / HERO
+================================ */
+
+.page-hero {
+  display: grid;
+  gap: 1.8rem;
+  margin-top: 1.25rem;
+}
+
+.page-hero-text {
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  background: radial-gradient(
+    circle at top left,
+    var(--color-accent-soft),
+    transparent 55%
+  );
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.page-title {
+  font-size: 1.7rem;
+  margin: 0 0 0.35rem;
+}
+
+.page-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.hero-pill {
+  font-size: 0.72rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.page-hero-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.hero-card {
+  padding: 0.85rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
