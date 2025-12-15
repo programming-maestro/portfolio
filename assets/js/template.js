@@ -117,20 +117,56 @@
   `;
   }
 
+  // function buildFooter() {
+  //   const year = new Date().getFullYear();
+  //   return `
+  //     <footer class="site-footer">
+  //       <div class="site-footer-inner">
+  //         <div>© ${year} Chetan Maikhuri. All rights reserved.</div>
+  //         <div class="footer-links">
+  //           <a href="https://www.linkedin.com/in/cm6" target="_blank" rel="noopener">LinkedIn</a>
+  //           <a href="https://github.com/programming-maestro" target="_blank" rel="noopener">GitHub</a>
+  //           <a href="/contact.html">Contact</a>
+  //         </div>
+  //       </div>
+  //     </footer>
+  //   `;
+  // }
+
   function buildFooter() {
     const year = new Date().getFullYear();
     return `
-      <footer class="site-footer">
-        <div class="site-footer-inner">
-          <div>© ${year} Chetan Maikhuri. All rights reserved.</div>
-          <div class="footer-links">
-            <a href="https://www.linkedin.com/in/cm6" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="https://github.com/programming-maestro" target="_blank" rel="noopener">GitHub</a>
-            <a href="/contact.html">Contact</a>
-          </div>
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div>© ${year} Chetan Maikhuri. All rights reserved.</div>
+
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/cm6" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/programming-maestro" target="_blank" rel="noopener">GitHub</a>
+          <a href="/contact.html">Contact</a>
         </div>
-      </footer>
-    `;
+
+       
+        
+        
+
+        <!-- Site analytics (hidden until JS populates) -->
+        <div
+          id="site-analytics"
+          class="site-metrics"
+          style="display:none; margin-top:8px; font-size:13px; opacity:0.8"
+        >
+          <span>
+            <strong id="site-unique-count"></strong> unique visitors
+          </span>
+          &nbsp;·&nbsp;
+          <span>
+            <strong id="site-visit-count"></strong> total visits
+          </span>
+        </div>
+      </div>
+    </footer>
+  `;
   }
 
   function injectChrome() {
@@ -213,5 +249,101 @@
     document.addEventListener("DOMContentLoaded", injectChrome);
   } else {
     injectChrome();
+  }
+})();
+
+// unique visitor count
+(async function () {
+  function generateFingerprint() {
+    return btoa(
+      [
+        navigator.userAgent,
+        screen.width + "x" + screen.height,
+        Intl.DateTimeFormat().resolvedOptions().timeZone,
+        navigator.language,
+        navigator.platform,
+      ].join("::"),
+    );
+  }
+
+  try {
+    fetch(
+      "https://script.google.com/macros/s/AKfycbyJ0pSglHi9wVOAAWvVBq1vvxTf56z1X-afZBPxPrp4ZmlJoOpaYKE5r7gySFxhKJit/exec",
+      {
+        method: "POST",
+        mode: "no-cors", // ⭐ KEY FIX
+        headers: {
+          "Content-Type": "text/plain", // ⭐ KEY FIX
+        },
+        body: JSON.stringify({
+          fingerprint: generateFingerprint(),
+          userAgent: navigator.userAgent,
+          screen: screen.width + "x" + screen.height,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          language: navigator.language,
+        }),
+      },
+    );
+  } catch (e) {
+    // intentionally silent
+  }
+})();
+
+// Site analytics
+
+(async function fetchSiteAnalytics() {
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycbyJ0pSglHi9wVOAAWvVBq1vvxTf56z1X-afZBPxPrp4ZmlJoOpaYKE5r7gySFxhKJit/exec";
+
+  const container = document.getElementById("site-analytics");
+  const uniqueEl = document.getElementById("site-unique-count");
+  const visitEl = document.getElementById("site-visit-count");
+
+  if (!container || !uniqueEl || !visitEl) return;
+
+  /* ============================
+     1. Render last-known values
+     ============================ */
+  const cached = localStorage.getItem("site_analytics_cache");
+
+  if (cached) {
+    try {
+      const parsed = JSON.parse(cached);
+      if (parsed.total_unique_users && parsed.total_visits) {
+        uniqueEl.innerText = parsed.total_unique_users;
+        visitEl.innerText = parsed.total_visits;
+        container.style.display = "block";
+      }
+    } catch (_) {}
+  }
+
+  /* ============================
+     2. Fetch fresh values async
+     ============================ */
+  try {
+    const res = await fetch(API_URL);
+    const data = await res.json();
+
+    const totalUnique = data?.summary?.total_unique_users;
+    const totalVisits = data?.summary?.total_visits;
+
+    if (totalUnique && totalVisits) {
+      // Update UI
+      uniqueEl.innerText = totalUnique;
+      visitEl.innerText = totalVisits;
+      container.style.display = "block";
+
+      // Cache for next load
+      localStorage.setItem(
+        "site_analytics_cache",
+        JSON.stringify({
+          total_unique_users: totalUnique,
+          total_visits: totalVisits,
+          ts: Date.now(),
+        }),
+      );
+    }
+  } catch (err) {
+    // Silent failure — cached values (if any) stay visible
   }
 })();
