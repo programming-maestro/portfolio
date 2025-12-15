@@ -133,31 +133,78 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Page-specific JS -->
     <script>
-        const PASSPHRASE = "cmdm"; // 🔒 CHANGE PASSPHRASE HERE
+        // const PASSPHRASE = "cmdm"; // 🔒 CHANGE PASSPHRASE HERE
 
         const authGate = document.getElementById("auth-gate");
         const analyticsContent = document.getElementById("analytics-content");
         const authBtn = document.getElementById("auth-btn");
         const authInput = document.getElementById("admin-pass");
         const authError = document.getElementById("auth-error");
+        const API_URL =
+            "https://script.google.com/macros/s/AKfycbyJ0pSglHi9wVOAAWvVBq1vvxTf56z1X-afZBPxPrp4ZmlJoOpaYKE5r7gySFxhKJit/exec";
 
-
-        function unlock() {
-            authGate.style.display = "none";
-            analyticsContent.style.display = "block";
-            loadAnalytics(); // fetch data only after auth
-        }
-
-        // Check existing session
-        if (sessionStorage.getItem("analytics_auth") === "true") {
+        if (sessionStorage.getItem("analytics_token")) {
             unlock();
         }
+        // function unlock() {
+        //     authGate.style.display = "none";
+        //     analyticsContent.style.display = "block";
+        //     loadAnalytics(); // fetch data only after auth
+        // }
+        function unlock() {
+            const token = sessionStorage.getItem("analytics_token");
+            if (!token) return;
 
-        authBtn.addEventListener("click", () => {
-            if (authInput.value === PASSPHRASE) {
-                sessionStorage.setItem("analytics_auth", "true");
-                unlock();
-            } else {
+            authGate.style.display = "none";
+            analyticsContent.style.display = "block";
+            loadAnalytics();
+        }
+
+
+        // Check existing session
+        // if (sessionStorage.getItem("analytics_auth") === "true") {
+        //     unlock();
+        // }
+
+        // authBtn.addEventListener("click", () => {
+
+        //     if (authInput.value === PASSPHRASE) {
+        //         sessionStorage.setItem("analytics_auth", "true");
+        //         unlock();
+        //     }
+
+        //     else {
+        //         authError.style.display = "block";
+        //     }
+        // }
+        authBtn.addEventListener("click", async () => {
+            authError.style.display = "none";
+
+            const pass = authInput.value.trim();
+            if (!pass) return;
+
+            try {
+                const res = await fetch(API_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        action: "auth",
+                        pass
+                    })
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    // store token in session (tab-based)
+                    sessionStorage.setItem("analytics_token", data.token);
+                    unlock();
+                } else {
+                    authError.style.display = "block";
+                }
+            } catch (err) {
                 authError.style.display = "block";
             }
         });
@@ -177,10 +224,15 @@
 
         async function loadAnalytics() {
             const theme = themeColors();
-            const API_URL =
-                "https://script.google.com/macros/s/AKfycbyJ0pSglHi9wVOAAWvVBq1vvxTf56z1X-afZBPxPrp4ZmlJoOpaYKE5r7gySFxhKJit/exec";
+            // const API_URL =
+            //     "https://script.google.com/macros/s/AKfycbyJ0pSglHi9wVOAAWvVBq1vvxTf56z1X-afZBPxPrp4ZmlJoOpaYKE5r7gySFxhKJit/exec";
 
-            const res = await fetch(API_URL);
+            // const res = await fetch(API_URL);
+            const token = sessionStorage.getItem("analytics_token");
+            if (!token) return;
+
+            const res = await fetch(`${API_URL}?token=${token}`);
+
             const data = await res.json();
 
             // Summary
