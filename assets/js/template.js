@@ -150,21 +150,29 @@
         
         
 
-        <!-- Site analytics (hidden until JS populates) -->
+       <!-- Site analytics (hidden until JS populates) -->
+      <div
+        id="site-analytics"
+        class="site-metrics"
+        style="display:none; margin-top:8px; font-size:13px; opacity:0.85"
+      >
+        <span>
+          <strong id="site-unique-count"></strong> unique visitors
+        </span>
+        &nbsp;·&nbsp;
+        <span>
+          <strong id="site-visit-count"></strong> total visits
+        </span>
+
+        <!-- Privacy note (hidden until analytics visible) -->
         <div
-          id="site-analytics"
-          class="site-metrics"
-          style="display:none; margin-top:8px; font-size:13px; opacity:0.8"
+          id="analytics-privacy-note"
+          style="margin-top:4px; font-size:12px; opacity:0.7; display:none"
         >
-          <span>
-            <strong id="site-unique-count"></strong> unique visitors
-          </span>
-          &nbsp;·&nbsp;
-          <span>
-            <strong id="site-visit-count"></strong> total visits
-          </span>
+          This site uses anonymous, cookie-free analytics
         </div>
       </div>
+
     </footer>
   `;
   }
@@ -313,6 +321,9 @@
         uniqueEl.innerText = parsed.total_unique_users;
         visitEl.innerText = parsed.total_visits;
         container.style.display = "block";
+
+        const privacyNote = document.getElementById("analytics-privacy-note");
+        if (privacyNote) privacyNote.style.display = "block";
       }
     } catch (_) {}
   }
@@ -332,6 +343,9 @@
       uniqueEl.innerText = totalUnique;
       visitEl.innerText = totalVisits;
       container.style.display = "block";
+
+      const privacyNote = document.getElementById("analytics-privacy-note");
+      if (privacyNote) privacyNote.style.display = "block";
 
       // Cache for next load
       localStorage.setItem(
