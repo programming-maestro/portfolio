@@ -45,3 +45,46 @@
   font-weight: 600;
   opacity: 0.8;
 }
+
+/* =========================
+   Analytics charts & stats
+   ========================= */
+
+.analytics-stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* Chart canvas spacing */
+canvas {
+  width: 100% !important;
+}
+
+/* Prevent card hover jump for charts */
+.card:hover {
+  transform: none;
+}
+/* Ensure charts can grow vertically */
+.card canvas {
+  display: block;
+}
+/* =========================
+   Dark mode chart polish
+   ========================= */
+
+html[data-theme="dark"] .card canvas {
+  background: transparent;
+}
+
+html[data-theme="dark"] .analytics-stat {
+  background: var(--color-surface-alt);
+}

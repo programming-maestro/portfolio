@@ -17,126 +17,121 @@
     <!-- Header injected by template.js -->
     <header id="site-header"></header>
 
-    <main class="container">
-        <section class="card" id="auth-gate">
-            <h2>Admin access</h2>
-            <p class="muted">Enter passphrase to view analytics</p>
+    <main>
+        <div class="page-shell">
 
-            <input type="password" id="admin-pass" placeholder="Enter passphrase"
-                style="max-width: 280px; padding: 8px" />
+            <!-- Hero -->
+            <section class="page-hero">
+                <div class="page-hero-text">
+                    <div class="page-kicker">
+                        <span class="page-kicker-dot"></span>
+                        <span>Internal</span>
+                        <span>· Analytics</span>
+                    </div>
 
-            <button id="auth-btn" style="margin-left: 8px" class="btn">
-                Unlock
-            </button>
+                    <h1 class="page-title">Website analytics</h1>
+                    <p class="page-subtitle">
+                        Read-only dashboard showing real visitor activity and trends.
+                    </p>
 
-            <p id="auth-error" style="color: #e11d48; display: none; margin-top: 8px">
-                Invalid passphrase
-            </p>
-        </section>
-        <div id="analytics-content" style="display:none">
-            <section class="card">
-                <h1>Website Analytics</h1>
-                <p class="muted">
-                    Internal dashboard · Read-only · Auto-updated
+                    <div class="hero-meta">
+                        <span class="hero-pill">Auto updated</span>
+                        <span class="hero-pill">Unique users</span>
+                        <span class="hero-pill">Page visits</span>
+                    </div>
+                </div>
+
+                <aside class="page-hero-aside">
+                    <div class="hero-card">
+                        <div class="hero-card-title">Access level</div>
+                        <p>Private · Admin only · Session based</p>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- AUTH GATE (unchanged logic) -->
+            <section class="card" id="auth-gate">
+                <h2>Admin access</h2>
+                <p class="muted">Enter passphrase to view analytics</p>
+
+                <input type="password" id="admin-pass" placeholder="Enter passphrase"
+                    style="max-width: 260px; padding: 8px" />
+                <button id="auth-btn" class="btn btn-primary">Unlock</button>
+
+                <p id="auth-error" style="color:#e11d48;display:none;margin-top:8px">
+                    Invalid passphrase
                 </p>
             </section>
 
-            <!-- Summary -->
-            <section class="card">
-                <h2>Summary</h2>
-                <div class="analytics-summary">
-                    <div class="summary-box">
-                        <div class="summary-value" id="summary-unique">–</div>
-                        <div class="summary-label">Total unique users</div>
-                    </div>
-                    <div class="summary-box">
-                        <div class="summary-value" id="summary-visits">–</div>
-                        <div class="summary-label">Total visits</div>
-                    </div>
-                </div>
-            </section>
+            <!-- ANALYTICS -->
+            <div id="analytics-content" style="display:none">
 
-            <!-- Daily -->
-            <section class="card">
-                <h2>Daily Unique Users</h2>
-                <table class="analytics-table" id="daily-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Unique users</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </section>
+                <!-- Summary -->
+                <section class="section">
+                    <header class="section-header">
+                        <h2 class="section-title">Summary</h2>
+                        <p class="section-subtitle">Overall traffic snapshot</p>
+                    </header>
 
-            <!-- Weekly -->
-            <section class="card">
-                <h2>Weekly Unique Users</h2>
-                <table class="analytics-table" id="weekly-table">
-                    <thead>
-                        <tr>
-                            <th>Year</th>
-                            <th>Week</th>
-                            <th>Unique users</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </section>
+                    <div class="section-grid">
+                        <div class="card analytics-stat">
+                            <div class="stat-value" id="summary-unique">–</div>
+                            <div class="stat-label">Total unique users</div>
+                        </div>
+
+                        <div class="card analytics-stat">
+                            <div class="stat-value" id="summary-visits">–</div>
+                            <div class="stat-label">Total visits</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Daily -->
+                <section class="section">
+                    <header class="section-header">
+                        <h2 class="section-title">Daily unique users</h2>
+                        <p class="section-subtitle">Last activity trend</p>
+                    </header>
+
+                    <div class="card">
+                        <canvas id="dailyChart" height="120"></canvas>
+                    </div>
+                </section>
+
+                <!-- Weekly -->
+                <section class="section">
+                    <header class="section-header">
+                        <h2 class="section-title">Weekly unique users</h2>
+                        <p class="section-subtitle">Week-over-week growth</p>
+                    </header>
+
+                    <div class="card">
+                        <canvas id="weeklyChart" height="120"></canvas>
+                    </div>
+                </section>
+
+                <!-- Page wise -->
+                <section class="section">
+                    <header class="section-header">
+                        <h2 class="section-title">Page-wise visits</h2>
+                        <p class="section-subtitle">Most viewed pages</p>
+                    </header>
+
+                    <div class="card">
+                        <!-- <canvas id="pageChart"></canvas> -->
+                        <canvas id="pageChart" height="200"></canvas>
+                    </div>
+                </section>
+
+            </div>
         </div>
     </main>
 
     <!-- Footer injected by template.js -->
     <footer id="site-footer"></footer>
-
+    <!-- Chart.js (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Page-specific JS -->
-    <!-- <script>
-        (async function loadAnalytics() {
-            const API_URL =
-                "https://script.google.com/macros/s/AKfycbyJ0pSglHi9wVOAAWvVBq1vvxTf56z1X-afZBPxPrp4ZmlJoOpaYKE5r7gySFxhKJit/exec";
-
-            try {
-                const res = await fetch(API_URL);
-                const data = await res.json();
-
-                /* ========= SUMMARY ========= */
-                document.getElementById("summary-unique").innerText =
-                    data.summary.total_unique_users;
-                document.getElementById("summary-visits").innerText =
-                    data.summary.total_visits;
-
-                /* ========= DAILY ========= */
-                const dailyBody = document.querySelector("#daily-table tbody");
-                dailyBody.innerHTML = data.daily
-                    .map(
-                        (d) => `
-              <tr>
-                <td>${d.date}</td>
-                <td>${d.unique_users}</td>
-              </tr>
-            `,
-                    )
-                    .join("");
-
-                /* ========= WEEKLY ========= */
-                const weeklyBody = document.querySelector("#weekly-table tbody");
-                weeklyBody.innerHTML = data.weekly
-                    .map(
-                        (w) => `
-              <tr>
-                <td>${w.year}</td>
-                <td>${w.week}</td>
-                <td>${w.unique_users}</td>
-              </tr>
-            `,
-                    )
-                    .join("");
-            } catch (err) {
-                console.error("Failed to load analytics", err);
-            }
-        })();
-    </script> -->
     <script>
         const PASSPHRASE = "cmdm"; // 🔒 CHANGE PASSPHRASE HERE
 
@@ -145,6 +140,7 @@
         const authBtn = document.getElementById("auth-btn");
         const authInput = document.getElementById("admin-pass");
         const authError = document.getElementById("auth-error");
+
 
         function unlock() {
             authGate.style.display = "none";
@@ -165,35 +161,143 @@
                 authError.style.display = "block";
             }
         });
+        /* =========================
+            Theme color helper
+        ========================= */
+        function themeColors() {
+            const css = getComputedStyle(document.documentElement);
+            return {
+                text: css.getPropertyValue("--color-text").trim(),
+                muted: css.getPropertyValue("--color-text-muted").trim(),
+                border: css.getPropertyValue("--color-border").trim(),
+                accent: css.getPropertyValue("--color-accent").trim(),
+                accentSoft: css.getPropertyValue("--color-accent-soft").trim()
+            };
+        }
 
         async function loadAnalytics() {
+            const theme = themeColors();
             const API_URL =
                 "https://script.google.com/macros/s/AKfycbyJ0pSglHi9wVOAAWvVBq1vvxTf56z1X-afZBPxPrp4ZmlJoOpaYKE5r7gySFxhKJit/exec";
 
             const res = await fetch(API_URL);
             const data = await res.json();
 
+            // Summary
             document.getElementById("summary-unique").innerText =
                 data.summary.total_unique_users;
             document.getElementById("summary-visits").innerText =
                 data.summary.total_visits;
 
-            document.querySelector("#daily-table tbody").innerHTML =
-                data.daily.map(d => `
-        <tr>
-          <td>${d.date}</td>
-          <td>${d.unique_users}</td>
-        </tr>
-      `).join("");
+            const textColor = getComputedStyle(document.documentElement)
+                .getPropertyValue("--color-text");
 
-            document.querySelector("#weekly-table tbody").innerHTML =
-                data.weekly.map(w => `
-        <tr>
-          <td>${w.year}</td>
-          <td>${w.week}</td>
-          <td>${w.unique_users}</td>
-        </tr>
-      `).join("");
+            /* Daily line chart */
+            new Chart(document.getElementById("dailyChart"), {
+                type: "line",
+                data: {
+                    labels: data.daily.map(d => d.date),
+                    datasets: [{
+                        data: data.daily.map(d => d.unique_users),
+                        borderColor: theme.accent,
+                        backgroundColor: theme.accentSoft,
+                        fill: true,
+                        tension: 0.35,
+                        borderWidth: 2,
+                        pointRadius: 3
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: theme.muted },
+                            grid: { color: theme.border }
+                        },
+                        y: {
+                            ticks: { color: theme.muted },
+                            grid: { color: theme.border }
+                        }
+                    }
+                }
+            });
+
+
+            /* Weekly bar chart */
+            new Chart(document.getElementById("weeklyChart"), {
+                type: "bar",
+                data: {
+                    labels: data.weekly.map(w => `${w.year}-W${w.week}`),
+                    datasets: [{
+                        data: data.weekly.map(w => w.unique_users),
+                        backgroundColor: theme.accent
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: theme.muted },
+                            grid: { color: theme.border }
+                        },
+                        y: {
+                            ticks: { color: theme.muted },
+                            grid: { color: theme.border }
+                        }
+                    }
+                }
+            });
+
+
+            /* Page-wise horizontal bar */
+            const pageLabels = data.pages.map(p => p.page);
+            const pageValues = data.pages.map(p => p.total_visits);
+
+            const pageChartCanvas = document.getElementById("pageChart");
+            pageChartCanvas.style.height = `${pageLabels.length * 32}px`;
+
+            new Chart(pageChartCanvas, {
+                type: "bar",
+                data: {
+                    labels: pageLabels,
+                    datasets: [{
+                        data: pageValues,
+                        backgroundColor: theme.accent
+                    }]
+                },
+                options: {
+                    indexAxis: "y",
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                title: items => items[0].label
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                color: theme.muted,
+                                autoSkip: false
+                            },
+                            grid: {
+                                display: false
+                            }
+                        },
+                        x: {
+                            ticks: { color: theme.muted },
+                            grid: { color: theme.border }
+                        }
+                    }
+                }
+            });
+
         }
     </script>
 

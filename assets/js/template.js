@@ -285,6 +285,7 @@
         },
         body: JSON.stringify({
           fingerprint: generateFingerprint(),
+          page: window.location.pathname, // ⭐ ADD THIS
           userAgent: navigator.userAgent,
           screen: screen.width + "x" + screen.height,
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
