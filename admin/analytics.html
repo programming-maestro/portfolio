@@ -217,8 +217,15 @@
                             grid: { color: theme.border }
                         },
                         y: {
-                            ticks: { color: theme.muted },
-                            grid: { color: theme.border }
+                            beginAtZero: true,
+                            ticks: {
+                                color: theme.muted,
+                                precision: 0,          // ⬅ no decimals
+                                callback: value => Math.round(value)
+                            },
+                            grid: {
+                                color: theme.border
+                            }
                         }
                     }
                 }
@@ -244,9 +251,20 @@
                             ticks: { color: theme.muted },
                             grid: { color: theme.border }
                         },
+                        // y: {
+                        //     ticks: { color: theme.muted },
+                        //     grid: { color: theme.border }
+                        // }
                         y: {
-                            ticks: { color: theme.muted },
-                            grid: { color: theme.border }
+                            beginAtZero: true,
+                            ticks: {
+                                color: theme.muted,
+                                precision: 0,
+                                callback: value => Math.round(value)
+                            },
+                            grid: {
+                                color: theme.border
+                            }
                         }
                     }
                 }
