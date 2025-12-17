@@ -1,0 +1,28 @@
+/* ======================================================
+   Education & Certifications
+   Scoped extensions only — no layout overrides
+   ====================================================== */
+
+.edu-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.edu-card {
+  display: block;
+  text-decoration: none;
+}
+
+.edu-card h3 {
+  margin-top: 0;
+}
+
+.edu-card p {
+  margin-bottom: 0;
+}
+
+.edu-card:hover {
+  transform: translateY(-4px);
+  transition: transform 0.2s ease;
+}
