@@ -60,7 +60,7 @@
     const navLinks = NAV_ITEMS.map((item) => {
       const cleanItemHref = item.href.replace(/\/$/, "");
       // Highlight menu
-      const isActive =
+      let isActive =
         // 1. Exact match (e.g. /contact.html)
         currentCleanPath === cleanItemHref ||
         // 2. Home page only (/ or /index.html)
@@ -382,3 +382,22 @@
     // Silent failure — cached values (if any) stay visible
   }
 })();
+
+// -----------------------------
+// Global SEO schema injection
+// -----------------------------
+(function injectSchemaOnce() {
+  if (document.getElementById("schema-loader")) return;
+
+  // schemaScript.id = "global-schema";
+  // schemaScript.type = "application/ld+json";
+
+  const schemaScript = document.createElement("script");
+  schemaScript.id = "schema-loader";
+  schemaScript.src = "/assets/js/schema.js";
+  schemaScript.defer = true;
+
+  document.head.appendChild(schemaScript);
+})();
+
+console.log("before schema loader");
