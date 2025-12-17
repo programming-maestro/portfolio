@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <link rel="stylesheet" href="/assets/css/edu/education.css" />
+    <link rel="stylesheet" href="/assets/css/breadcrumb.css" />
     <script src="/assets/js/template.js" defer></script>
 </head>
 
@@ -19,16 +20,17 @@
 
     <main>
         <div class="page-shell">
-            <nav class="breadcrumb">
+
+            <!-- ================= Breadcrumb ================= -->
+            <nav class="breadcrumb breadcrumb--glass">
                 <a href="/">Home</a>
-                <span class="breadcrumb-sep">→</span>
+                <span class="sep">→</span>
                 <a href="/edu/">Education</a>
-                <span class="breadcrumb-sep">→</span>
-                <span class="breadcrumb-current">
-                    Azure Developer Associate
-                </span>
+                <span class="sep">→</span>
+                <span class="current">Azure Developer Associate</span>
             </nav>
 
+            <!-- ================= Hero ================= -->
             <section class="page-hero">
                 <div class="page-hero-text">
                     <div class="page-kicker">
@@ -42,35 +44,44 @@
                     <p class="page-subtitle">
                         Developing, deploying, and integrating cloud-native applications on Azure.
                     </p>
+
                     <div class="hero-actions">
                         <a class="btn btn-outline" href="/edu/">
                             View education overview
                         </a>
                     </div>
-
                 </div>
             </section>
 
-            <section class="page-section">
-                <div class="page-section-content content-narrow">
+            <!-- ================= Content ================= -->
+            <section class="section">
+                <div class="section-grid">
+                    <div class="card">
+                        <div class="card-body">
 
-                    <ul>
-                        <li>Azure compute services and application hosting</li>
-                        <li>Storage, data solutions, and integration patterns</li>
-                        <li>Authentication, authorization, and identity management</li>
-                        <li>Monitoring, diagnostics, and performance optimization</li>
-                    </ul>
+                            <ul>
+                                <li>Azure compute services and application hosting</li>
+                                <li>Storage, data solutions, and integration patterns</li>
+                                <li>Authentication, authorization, and identity management</li>
+                                <li>Monitoring, diagnostics, and performance optimization</li>
+                            </ul>
 
-                    <p>
-                        This certification strengthens cloud-based automation,
-                        backend testing, and CI/CD integration capabilities.
-                    </p>
+                            <p>
+                                This certification strengthens cloud-based automation,
+                                backend testing, and CI/CD integration capabilities by
+                                enabling deeper understanding of Azure application
+                                architecture and operational best practices.
+                            </p>
 
+                        </div>
+                    </div>
                 </div>
             </section>
 
         </div>
     </main>
+
+    <footer id="site-footer"></footer>
 </body>
 
 </html>

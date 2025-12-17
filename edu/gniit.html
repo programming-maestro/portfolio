@@ -11,25 +11,26 @@
 
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <link rel="stylesheet" href="/assets/css/edu/education.css" />
+    <link rel="stylesheet" href="/assets/css/breadcrumb.css" />
     <script src="/assets/js/template.js" defer></script>
 </head>
 
 <body>
-    <!-- Header injected by template.js -->
     <header id="site-header"></header>
 
     <main>
         <div class="page-shell">
-            <nav class="breadcrumb">
+
+            <!-- ================= Breadcrumb ================= -->
+            <nav class="breadcrumb breadcrumb--glass">
                 <a href="/">Home</a>
-                <span class="breadcrumb-sep">→</span>
+                <span class="sep">→</span>
                 <a href="/edu/">Education</a>
-                <span class="breadcrumb-sep">→</span>
-                <span class="breadcrumb-current">
-                    GNIIT — Software Engineering Program
-                </span>
+                <span class="sep">→</span>
+                <span class="current">GNIIT — Software Engineering Program</span>
             </nav>
-            <!-- Hero -->
+
+            <!-- ================= Hero ================= -->
             <section class="page-hero">
                 <div class="page-hero-text">
                     <div class="page-kicker">
@@ -44,6 +45,7 @@
                         Industry-oriented software engineering program with strong emphasis
                         on hands-on development and real-world application design.
                     </p>
+
                     <div class="hero-actions">
                         <a class="btn btn-outline" href="/edu/">
                             View education overview
@@ -52,34 +54,40 @@
                 </div>
             </section>
 
-            <!-- Content -->
-            <section class="page-section">
-                <div class="page-section-content content-narrow">
+            <!-- ================= Content ================= -->
+            <section class="section">
+                <div class="section-grid">
+                    <div class="card">
+                        <div class="card-body">
 
-                    <p>
-                        The GNIIT program provided a structured and practice-driven introduction
-                        to software engineering, forming the foundation of my career in
-                        enterprise systems and quality engineering.
-                    </p>
+                            <p>
+                                The GNIIT program provided a structured and practice-driven
+                                introduction to software engineering, forming the foundation
+                                of my career in enterprise systems and quality engineering.
+                            </p>
 
-                    <ul>
-                        <li>Programming fundamentals and object-oriented design</li>
-                        <li>Application development using industry-standard practices</li>
-                        <li>Relational databases and data modeling concepts</li>
-                        <li>Software development lifecycle (SDLC) and engineering discipline</li>
-                    </ul>
+                            <ul>
+                                <li>Programming fundamentals and object-oriented design</li>
+                                <li>Application development using industry-standard practices</li>
+                                <li>Relational databases and data modeling concepts</li>
+                                <li>Software development lifecycle (SDLC) and engineering discipline</li>
+                            </ul>
 
-                    <p>
-                        This program enabled an early transition into professional software roles
-                        and later supported growth into automation architecture, platform QA,
-                        and engineering leadership positions.
-                    </p>
+                            <p>
+                                This program enabled an early transition into professional
+                                software roles and later supported growth into automation
+                                architecture, platform QA, and engineering leadership positions.
+                            </p>
 
+                        </div>
+                    </div>
                 </div>
             </section>
 
         </div>
     </main>
+
+    <footer id="site-footer"></footer>
 </body>
 
 </html>
