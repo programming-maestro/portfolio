@@ -3,17 +3,20 @@
    Scoped extensions only — no layout overrides
    ====================================================== */
 
+/* Two-card layout aligned with existing site rhythm */
 .edu-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
 }
 
+/* Card link hygiene */
 .edu-card {
   display: block;
   text-decoration: none;
 }
 
+/* Typography consistency */
 .edu-card h3 {
   margin-top: 0;
 }
@@ -22,7 +25,49 @@
   margin-bottom: 0;
 }
 
+/* Subtle interaction, same as rest of site */
 .edu-card:hover {
   transform: translateY(-4px);
   transition: transform 0.2s ease;
+}
+
+/* Responsive fallback */
+@media (max-width: 768px) {
+  .edu-list {
+    grid-template-columns: 1fr;
+  }
+}
+/* ======================================================
+   Breadcrumbs
+   ====================================================== */
+
+.breadcrumb {
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  color: var(--text-muted);
+}
+
+.breadcrumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-sep {
+  margin: 0 6px;
+}
+
+.breadcrumb-current {
+  color: var(--text-primary);
+}
+
+/* ======================================================
+   Back to Education CTA
+   ====================================================== */
+
+.edu-back-cta {
+  margin-top: 32px;
 }

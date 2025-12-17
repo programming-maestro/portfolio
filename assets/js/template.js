@@ -40,8 +40,17 @@
     // Define your nav items here; adjust paths as per your repo
     const NAV_ITEMS = [
       { href: "/index.html", label: "Home", pill: "Overview" },
-      { href: "/projects/index.html", label: "Projects", pill: "Case studies" },
+      {
+        href: "/projects/index.html",
+        label: "Projects",
+        pill: "QA Automation",
+      },
       { href: "/companies/index.html", label: "Experience", pill: "Roles" },
+      {
+        href: "/edu/index.html",
+        label: "Education",
+        pill: "Credentials",
+      },
       { href: "/contact.html", label: "Contact", pill: "Say hi" },
     ];
 
@@ -50,11 +59,22 @@
 
     const navLinks = NAV_ITEMS.map((item) => {
       const cleanItemHref = item.href.replace(/\/$/, "");
+      // Highlight menu
+      const isActive =
+        // 1. Exact match (e.g. /contact.html)
+        currentCleanPath === cleanItemHref ||
+        // 2. Home page only (/ or /index.html)
+        (cleanItemHref === "/index.html" &&
+          (currentCleanPath === "" ||
+            currentCleanPath === "/" ||
+            currentCleanPath === "/index.html")) ||
+        // 3. Section-based pages (projects, companies, edu, etc.)
+        (cleanItemHref !== "/index.html" &&
+          cleanItemHref.endsWith("/index.html") &&
+          currentCleanPath.startsWith(
+            cleanItemHref.replace("/index.html", ""),
+          ));
 
-      // base active check: exact match
-      let isActive = currentCleanPath === cleanItemHref;
-
-      // ⭐ Optional enhancement:
       // Treat "/" (root) as /index.html so Home is active there too
       if (
         (currentCleanPath === "" || currentCleanPath === "/") &&
@@ -161,7 +181,7 @@
         </span>
         &nbsp;·&nbsp;
         <span>
-          <strong id="site-visit-count"></strong> total visits
+          <strong id="site-visit-count"></strong> total page visits
         </span>
 
         <!-- Privacy note (hidden until analytics visible) -->
