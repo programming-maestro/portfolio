@@ -401,3 +401,52 @@
 })();
 
 console.log("before schema loader");
+// -----------------------------
+// Global favicon injection
+// -----------------------------
+(function injectFaviconsOnce() {
+  if (document.getElementById("favicon-loader")) return;
+
+  const fragment = document.createDocumentFragment();
+
+  const links = [
+    {
+      rel: "apple-touch-icon",
+      sizes: "180x180",
+      href: "/apple-touch-icon.png",
+    },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "32x32",
+      href: "/favicon-32x32.png",
+    },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "16x16",
+      href: "/favicon-16x16.png",
+    },
+    {
+      rel: "icon",
+      href: "/favicon.ico",
+    },
+    {
+      rel: "manifest",
+      href: "/site.webmanifest",
+    },
+  ];
+
+  links.forEach((attrs) => {
+    const link = document.createElement("link");
+    Object.entries(attrs).forEach(([k, v]) => link.setAttribute(k, v));
+    fragment.appendChild(link);
+  });
+
+  // Marker to avoid duplicate injection
+  const marker = document.createElement("meta");
+  marker.id = "favicon-loader";
+  fragment.appendChild(marker);
+
+  document.head.appendChild(fragment);
+})();
