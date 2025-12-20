@@ -1,9 +1,14 @@
-Static portfolio site for Chetan Maikhuri. Open index.html in a browser (file:// or via localhost). Header/footer are injected via assets/js/template.js. PDFs are in assets/pdfs/.
 
+ga.js              → loads GA4
+analytics.js       → attribution + device context
+template.js        → UI / theme / layout
+
+analytics.js   → detect + store (localStorage only)
+ga.ts          → read + send to GA4
 
 ======================
 Local Hosting:
-1.
+1. for windows
 cmd admin: netsh advfirewall firewall add rule name="Python HTTP Server 8000" dir=in action=allow protocol=TCP localport=8000
 
 2.
