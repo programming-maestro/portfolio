@@ -1,7 +1,68 @@
-// assets/js/template.js
-
 (function () {
   const CURRENT_PATH = window.location.pathname;
+  // -----------------------------
+  // First-touch attribution (UTM)
+  // -----------------------------
+  (function captureFirstTouchAttribution() {
+    const STORAGE_KEY = "cm_first_touch";
+
+    // Do not overwrite first-touch
+    if (localStorage.getItem(STORAGE_KEY)) return;
+
+    const params = new URLSearchParams(window.location.search);
+
+    const attribution = {
+      // utm_source: params.get("utm_source") || "direct",
+      // utm_medium: params.get("utm_medium") || "none",
+      // utm_campaign: params.get("utm_campaign") || "none",
+      // landing_page: window.location.pathname,
+      // referrer: document.referrer || "direct",
+      // first_seen_at: new Date().toISOString(),
+
+      source: params.get("utm_source") || "direct",
+      medium: params.get("utm_medium") || "none",
+      campaign: params.get("utm_campaign") || "none",
+      // content: params.get("utm_content"),
+      // term: params.get("utm_term"),
+      landing_page: window.location.pathname,
+      referrer: document.referrer || "direct",
+      first_seen_at: new Date().toISOString(),
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(attribution));
+
+    // Debug (safe to remove later)
+    console.info("📌 First-touch attribution saved", attribution);
+  })();
+
+  // -----------------------------
+  // Send first-touch attribution to GA4
+  // -----------------------------
+  (function sendFirstTouchToGA4() {
+    const STORAGE_KEY = "cm_first_touch";
+    const SENT_KEY = "cm_first_touch_sent";
+
+    // Guard rails
+    if (!window.gtag) return;
+    if (sessionStorage.getItem(SENT_KEY)) return;
+
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+
+    const attribution = JSON.parse(raw);
+
+    gtag("event", "first_touch_attribution", {
+      source: attribution.source,
+      medium: attribution.medium,
+      campaign: attribution.campaign,
+      landing_page: attribution.landing_page,
+    });
+
+    // Mark as sent (per browser session)
+    sessionStorage.setItem(SENT_KEY, "true");
+
+    console.info("📤 First-touch attribution sent to GA4", attribution);
+  })();
 
   // -----------------------------
   // Theme handling
