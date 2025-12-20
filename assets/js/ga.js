@@ -45,9 +45,17 @@
       };
 
       // Remove undefined / non-string values
-      userProperties = Object.fromEntries(
-        Object.entries(rawProps).filter(([, v]) => typeof v === "string"),
-      );
+      userProperties = {};
+
+      for (var key in rawProps) {
+        if (typeof rawProps[key] === "string") {
+          userProperties[key] = rawProps[key];
+        }
+      }
+
+      if (Object.keys(userProperties).length === 0) {
+        userProperties = null;
+      }
 
       // Mark as sent ONLY if something valid exists
       if (Object.keys(userProperties).length > 0) {
