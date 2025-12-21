@@ -418,8 +418,6 @@
 
   document.head.appendChild(schemaScript);
 })();
-
-console.log("before schema loader");
 // -----------------------------
 // Global favicon injection
 // -----------------------------
