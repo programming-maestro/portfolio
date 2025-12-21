@@ -211,7 +211,3 @@ If you would like to reuse any part of this repository, **explicit written permi
 ---
 
 ⭐ If you find this repository useful or inspiring, feel free to **star** it.
-
-```
-
-```
