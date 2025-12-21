@@ -100,3 +100,18 @@
     send_page_view: true,
   });
 })();
+// ============================================================
+// ga.js
+// GA4 Event Consumer
+// ============================================================
+
+(function gaEventBridge() {
+  if (!window.gtag) return;
+
+  window.addEventListener("cm:analytics", function (e) {
+    const { event, payload } = e.detail || {};
+    if (!event || !payload) return;
+
+    gtag("event", event, payload);
+  });
+})();

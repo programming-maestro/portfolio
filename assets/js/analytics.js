@@ -67,3 +67,49 @@
     console.warn("Device context storage failed", e);
   }
 })();
+// ============================================================
+// analytics.js
+// Navigation Click Event Producer
+// ============================================================
+
+(function analyticsNavigationClicks() {
+  document.addEventListener("click", function (event) {
+    const link = event.target.closest("a");
+    if (!link) return;
+
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("#")) return;
+
+    // Only internal navigation
+    const isInternal =
+      href.startsWith("/") || href.startsWith(window.location.origin);
+
+    if (!isInternal) return;
+
+    // Identify navigation location
+    const navContainer = link.closest("[data-nav-location]");
+    if (!navContainer) return;
+
+    const navLocation = navContainer.getAttribute("data-nav-location");
+
+    const navItem =
+      link.textContent?.trim() || link.getAttribute("aria-label") || "unknown";
+
+    const payload = {
+      nav_location: navLocation,
+      nav_item: navItem,
+      from_page: window.location.pathname,
+      to_page: new URL(href, window.location.origin).pathname,
+    };
+
+    // Dispatch a generic analytics event
+    window.dispatchEvent(
+      new CustomEvent("cm:analytics", {
+        detail: {
+          event: "navigation_click",
+          payload,
+        },
+      }),
+    );
+  });
+})();
