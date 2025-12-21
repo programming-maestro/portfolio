@@ -107,7 +107,7 @@
       }
 
       return `
-      <a href="${item.href}" class="${isActive ? "is-active" : ""}">
+      <a href="${item.href}" class="${isActive ? "is-active" : ""}" data-analytics="nav" data-label="${item.label.toLowerCase()}" >
         <span class="label">${item.label}</span>
         <span class="pill">${item.pill}</span>
       </a>
@@ -117,7 +117,7 @@
     return `
     <header class="site-header">
       <div class="site-header-inner">
-        <a href="/index.html" class="brand">
+        <a href="/index.html" class="brand" data-analytics="nav" data-label="home-brand">
           <span class="brand-avatar">CM</span>
           <span class="brand-text">
             <span class="brand-name">Chetan Maikhuri</span>
@@ -151,7 +151,7 @@
         </nav>
       </div>
 
-      <div class="nav-menu" data-role="nav-menu" data-nav-location="header">
+      <div class="nav-menu" data-role="nav-menu">
         <div class="nav-menu-inner">
           ${navLinks}
         </div>
@@ -159,23 +159,9 @@
     </header>
   `;
   }
-
-  // function buildFooter() {
-  //   const year = new Date().getFullYear();
-  //   return `
-  //     <footer class="site-footer">
-  //       <div class="site-footer-inner">
-  //         <div>© ${year} Chetan Maikhuri. All rights reserved.</div>
-  //         <div class="footer-links">
-  //           <a href="https://www.linkedin.com/in/cm6" target="_blank" rel="noopener">LinkedIn</a>
-  //           <a href="https://github.com/programming-maestro" target="_blank" rel="noopener">GitHub</a>
-  //           <a href="/contact.html">Contact</a>
-  //         </div>
-  //       </div>
-  //     </footer>
-  //   `;
-  // }
-
+  // -----------------------------
+  // Footer Logic
+  // -----------------------------
   function buildFooter() {
     const year = new Date().getFullYear();
     return `
@@ -186,7 +172,7 @@
         <div class="footer-links">
           <a href="https://www.linkedin.com/in/cm6" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://github.com/programming-maestro" target="_blank" rel="noopener">GitHub</a>
-          <a href="/contact.html">Contact</a>
+          <a href="/contact.html" data-analytics="nav" data-label="footer-contact">Contact</a>
         </div>
 
        
@@ -219,6 +205,70 @@
     </footer>
   `;
   }
+  // -----------------------------
+  // Breadcrumb Renderer (Generic)
+  // -----------------------------
+  // -----------------------------
+  // Breadcrumb Renderer (Generic + Analytics-ready)
+  // -----------------------------
+  function renderBreadcrumbs() {
+    // ❌ Do NOT render breadcrumbs on mobile
+    const IS_MOBILE = window.matchMedia("(max-width: 640px)").matches;
+    if (IS_MOBILE) return;
+
+    const meta = document.querySelector('meta[name="cm:breadcrumbs"]');
+    if (!meta) return;
+
+    const container = document.createElement("nav");
+    container.className = "breadcrumb breadcrumb--glass";
+
+    const items = meta
+      .getAttribute("content")
+      .split("|")
+      .map((entry) => {
+        const [label, href] = entry.split(":");
+        return {
+          label: label.trim(),
+          href: href?.trim() || null,
+        };
+      });
+
+    items.forEach((item, index) => {
+      // Separator
+      if (index > 0) {
+        const sep = document.createElement("span");
+        sep.className = "sep";
+        sep.textContent = "→";
+        container.appendChild(sep);
+      }
+
+      // Clickable crumb (analytics-enabled)
+      if (item.href) {
+        const a = document.createElement("a");
+        a.href = item.href;
+        a.textContent = item.label;
+
+        // 🔹 Analytics attributes
+        a.setAttribute("data-analytics", "breadcrumb");
+        a.setAttribute(
+          "data-label",
+          item.label.toLowerCase().replace(/\s+/g, "-"),
+        );
+
+        container.appendChild(a);
+      }
+      // Current page (non-clickable)
+      else {
+        const span = document.createElement("span");
+        span.className = "current";
+        span.textContent = item.label;
+        container.appendChild(span);
+      }
+    });
+
+    const shell = document.querySelector(".page-shell");
+    if (shell) shell.prepend(container);
+  }
 
   function injectChrome() {
     const headerHost = document.getElementById("site-header");
@@ -226,6 +276,9 @@
 
     if (headerHost) headerHost.innerHTML = buildHeader();
     if (footerHost) footerHost.innerHTML = buildFooter();
+
+    //Breadcrumbs
+    renderBreadcrumbs();
 
     // After injecting, wire up interactivity
     setupThemeToggle();

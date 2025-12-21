@@ -116,3 +116,52 @@
     gtag("event", event, payload);
   });
 })();
+
+// ============================================================
+// Analytics Intelligence Layer
+// ============================================================
+//
+// Responsibilities:
+// • Listen to user interactions
+// • Enrich events with semantics
+// • Dispatch vendor-agnostic analytics events
+// ============================================================
+
+(function analyticsEngine() {
+  // ------------------------------------------------------------
+  // Interaction depth mapping (single source of truth)
+  // ------------------------------------------------------------
+  const INTERACTION_DEPTH_MAP = {
+    nav: "primary",
+    cta: "primary",
+    card: "primary",
+    breadcrumb: "secondary",
+  };
+
+  function emit(eventName, payload) {
+    window.dispatchEvent(
+      new CustomEvent("cm:analytics", {
+        detail: {
+          event: eventName,
+          payload,
+        },
+      }),
+    );
+  }
+
+  document.addEventListener("click", function (e) {
+    const target = e.target.closest("[data-analytics]");
+    if (!target) return;
+
+    const navigationType = target.getAttribute("data-analytics");
+    const navigationLabel = target.getAttribute("data-label") || "unknown";
+
+    emit("navigation_click", {
+      navigation_type: navigationType,
+      navigation_label: navigationLabel,
+      interaction_depth: INTERACTION_DEPTH_MAP[navigationType] || "unknown",
+      destination: target.getAttribute("href") || null,
+      page_path: window.location.pathname,
+    });
+  });
+})();

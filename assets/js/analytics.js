@@ -1,8 +1,19 @@
-// assets/js/analytics.js
-(function () {
-  // -----------------------------
-  // First-touch attribution
-  // -----------------------------
+// ============================================================
+// Analytics Intelligence Layer
+// File: assets/js/analytics.js
+// ============================================================
+//
+// Responsibilities:
+// • First-touch attribution (UTM)
+// • First-touch device context
+// • Navigation / card / CTA click tracking
+// • Emit vendor-agnostic analytics events
+// ============================================================
+
+(function analyticsEngine() {
+  // ============================================================
+  // FIRST-TOUCH ATTRIBUTION (UTM)
+  // ============================================================
   const FIRST_TOUCH_KEY = "cm_first_touch";
 
   try {
@@ -20,96 +31,98 @@
       localStorage.setItem(FIRST_TOUCH_KEY, JSON.stringify(attribution));
     }
   } catch (e) {
-    console.warn("First-touch attribution storage failed", e);
+    console.warn("Analytics: First-touch attribution failed", e);
   }
 
-  // -----------------------------
-  // First-touch device context
-  // -----------------------------
+  // ============================================================
+  // FIRST-TOUCH DEVICE CONTEXT
+  // ============================================================
   const DEVICE_KEY = "cm_device_context";
 
   try {
-    if (localStorage.getItem(DEVICE_KEY)) return;
-
-    // Device type
-    let device_type = "desktop";
-    if (window.matchMedia("(max-width: 767px)").matches) {
-      device_type = "mobile";
-    } else if (
-      window.matchMedia("(min-width: 768px) and (max-width: 1024px)").matches
-    ) {
-      device_type = "tablet";
-    }
-
-    // OS detection
-    function detectOS() {
-      if (navigator.userAgentData?.platform) {
-        return navigator.userAgentData.platform.toLowerCase();
+    if (!localStorage.getItem(DEVICE_KEY)) {
+      // Device type
+      let device_type = "desktop";
+      if (window.matchMedia("(max-width: 767px)").matches) {
+        device_type = "mobile";
+      } else if (
+        window.matchMedia("(min-width: 768px) and (max-width: 1024px)").matches
+      ) {
+        device_type = "tablet";
       }
 
-      const ua = navigator.userAgent.toLowerCase();
-      if (ua.includes("android")) return "android";
-      if (/iphone|ipad|ipod/.test(ua)) return "ios";
-      if (ua.includes("win")) return "windows";
-      if (ua.includes("mac")) return "macos";
-      if (ua.includes("linux")) return "linux";
-      return "unknown";
+      // OS detection
+      function detectOS() {
+        if (navigator.userAgentData?.platform) {
+          return navigator.userAgentData.platform.toLowerCase();
+        }
+
+        const ua = navigator.userAgent.toLowerCase();
+        if (ua.includes("android")) return "android";
+        if (/iphone|ipad|ipod/.test(ua)) return "ios";
+        if (ua.includes("win")) return "windows";
+        if (ua.includes("mac")) return "macos";
+        if (ua.includes("linux")) return "linux";
+        return "unknown";
+      }
+
+      const payload = {
+        device_type,
+        os: detectOS(),
+        captured_at: new Date().toISOString(),
+      };
+
+      localStorage.setItem(DEVICE_KEY, JSON.stringify(payload));
     }
-
-    const payload = {
-      device_type,
-      os: detectOS(),
-      captured_at: new Date().toISOString(),
-    };
-
-    localStorage.setItem(DEVICE_KEY, JSON.stringify(payload));
   } catch (e) {
-    console.warn("Device context storage failed", e);
+    console.warn("Analytics: Device context capture failed", e);
   }
-})();
-// ============================================================
-// analytics.js
-// Navigation Click Event Producer
-// ============================================================
 
-(function analyticsNavigationClicks() {
-  document.addEventListener("click", function (event) {
-    const link = event.target.closest("a");
-    if (!link) return;
+  // ============================================================
+  // NAVIGATION & INTERACTION TRACKING
+  // ============================================================
 
-    const href = link.getAttribute("href");
-    if (!href || href.startsWith("#")) return;
+  // Single source of truth
+  const INTERACTION_DEPTH_MAP = {
+    nav: "primary",
+    cta: "primary",
+    card: "primary",
+    breadcrumb: "secondary",
+  };
 
-    // Only internal navigation
-    const isInternal =
-      href.startsWith("/") || href.startsWith(window.location.origin);
-
-    if (!isInternal) return;
-
-    // Identify navigation location
-    const navContainer = link.closest("[data-nav-location]");
-    if (!navContainer) return;
-
-    const navLocation = navContainer.getAttribute("data-nav-location");
-
-    const navItem =
-      link.textContent?.trim() || link.getAttribute("aria-label") || "unknown";
-
-    const payload = {
-      nav_location: navLocation,
-      nav_item: navItem,
-      from_page: window.location.pathname,
-      to_page: new URL(href, window.location.origin).pathname,
-    };
-
-    // Dispatch a generic analytics event
+  function emit(event, payload) {
     window.dispatchEvent(
       new CustomEvent("cm:analytics", {
-        detail: {
-          event: "navigation_click",
-          payload,
-        },
+        detail: { event, payload },
       }),
     );
+  }
+
+  document.addEventListener("click", function (e) {
+    const el = e.target.closest("[data-analytics]");
+    if (!el) return;
+
+    const href = el.getAttribute("href");
+    if (href && href.startsWith("#")) return;
+
+    // Only internal navigation (if href exists)
+    if (href) {
+      const isInternal =
+        href.startsWith("/") || href.startsWith(window.location.origin);
+
+      if (!isInternal) return;
+    }
+
+    const navigationType = el.getAttribute("data-analytics");
+    const navigationLabel =
+      el.getAttribute("data-label") || el.textContent?.trim() || "unknown";
+
+    emit("navigation_click", {
+      navigation_type: navigationType, // nav | card | cta | breadcrumb
+      navigation_label: navigationLabel,
+      interaction_depth: INTERACTION_DEPTH_MAP[navigationType] || "unknown",
+      destination: href ? new URL(href, window.location.origin).pathname : null,
+      page_path: window.location.pathname,
+    });
   });
 })();
