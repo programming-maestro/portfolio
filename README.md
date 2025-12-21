@@ -109,26 +109,30 @@ portfolio/
 │   └── *.html                 # Experience & case studies
 ├── sitemap.xml
 └── README.md
-
+```
 
 ## 📌 Featured Work Highlighted on the Site
 
 ### Performance Engineering
+
 - Web & backend load testing (JMeter, Locust, K6)
 - Frontend bottleneck identification
 - Backend scalability validation
 
 ### Automation Architecture
+
 - UI / API / Mobile automation frameworks
 - CI/CD quality gates
 - Device-farm integrations
 
 ### Shadow & Data Validation
+
 - Production traffic comparison
 - Backend compatibility verification
 - Risk-free migration testing
 
 ### QA Leadership & Strategy
+
 - QA org design (0 → 1 → scale)
 - Quality OKRs & governance
 - Release confidence frameworks
@@ -187,6 +191,7 @@ I’m open to:
 This project is intended for **personal and professional showcase purposes**.
 
 You are welcome to:
+
 - Reference architectural ideas
 - Learn from the structure
 - Reuse patterns with attribution
@@ -194,4 +199,7 @@ You are welcome to:
 ---
 
 ⭐ If you find this repository useful or inspiring, feel free to **star** it.
+
+```
+
 ```
