@@ -2,25 +2,29 @@
   const CURRENT_PATH = window.location.pathname;
 
   // -----------------------------
-  // Analytics bootstrap (FIRST)
-  // analytics.js → ga.js
+  // Analytics bootstrap (SAFE)
+  // ga.js → analytics.js
   // -----------------------------
-  function loadScript(src) {
-    return new Promise((resolve, reject) => {
-      const s = document.createElement("script");
-      s.src = src;
-      s.defer = true;
-      s.onload = resolve;
-      s.onerror = reject;
-      document.head.appendChild(s);
-    });
-  }
+  (function bootstrapAnalytics() {
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        const s = document.createElement("script");
+        s.src = src;
+        s.defer = true;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
 
-  loadScript("/assets/js/analytics.js")
-    .then(() => loadScript("/assets/js/ga.js"))
-    .catch((err) => {
-      console.error("Analytics bootstrap failed", err);
-    });
+    // 1️⃣ Load GA bridge FIRST (consumer)
+    loadScript("/assets/js/ga.js")
+      // 2️⃣ Then load analytics producers
+      .then(() => loadScript("/assets/js/analytics.js"))
+      .catch((err) => {
+        console.error("Analytics bootstrap failed", err);
+      });
+  })();
 
   // -----------------------------
   // Template logic starts here

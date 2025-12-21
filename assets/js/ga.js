@@ -112,6 +112,7 @@
     const { event, payload } = e.detail || {};
     if (!event || !payload) return;
 
+    console.log("[GA EVENT]", event, payload); // remove this console logging
     gtag("event", event, payload);
   });
 })();
