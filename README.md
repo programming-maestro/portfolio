@@ -1,132 +1,116 @@
-🚀 Chetan Maikhuri — Portfolio Website
+# 🚀 Chetan Maikhuri — Portfolio Website
 
-Quality Engineering Leader | SDET Architect | Release & Performance Engineering
+**Quality Engineering Leader | SDET Architect | Release & Performance Engineering**
 
-This repository hosts my personal professional portfolio website, built to showcase my experience, projects, and engineering philosophy across Quality Engineering, Automation, Performance Testing, and Release Governance.
+This repository hosts my **personal professional portfolio website**, built to showcase my experience, projects, and engineering philosophy across **Quality Engineering, Automation, Performance Testing, and Release Governance**.
 
-The site is intentionally designed as a lightweight, dependency-free static website to demonstrate strong fundamentals in web engineering, analytics instrumentation, SEO, and performance — not just UI presentation.
+The site is intentionally designed as a **lightweight, dependency-free static website** to demonstrate strong fundamentals in **web engineering, analytics instrumentation, SEO, and performance** — not just UI presentation.
 
-🌐 Live Website:
+🌐 **Live Website:**  
 👉 https://chetan-maikhuri.onrender.com
 
-👋 About Me
+---
 
-I am a Director-level Quality Engineering Leader with 13+ years of experience driving large-scale QA strategy, automation modernization, and performance engineering across:
+## 👋 About Me
 
-BFSI
+I am a **Director-level Quality Engineering Leader** with **13+ years of experience** driving large-scale QA strategy, automation modernization, and performance engineering across:
 
-Healthcare eCommerce
+- BFSI
+- Healthcare eCommerce
+- Consumer Internet (30M+ DAU)
+- SaaS & Platform Engineering
 
-Consumer Internet (30M+ DAU)
+I partner closely with **CTOs, VPs of Engineering, and Product leaders** to deliver:
 
-SaaS & Platform Engineering
+- Predictable releases
+- Scalable automation
+- Measurable quality ROI
+- Strong engineering governance
 
-I partner closely with CTOs, VPs of Engineering, and Product leaders to deliver:
+This portfolio is a **hands-on reflection** of how I think, design, and build production-grade systems.
 
-Predictable releases
+---
 
-Scalable automation
+## 🧱 What This Repository Contains
 
-Measurable quality ROI
+### ✅ Professional Portfolio Website
 
-Strong engineering governance
+- Static HTML, CSS, and Vanilla JavaScript
+- SEO-optimized structure
+- Mobile-first responsive design
+- Light / dark theme support
+- Clean navigation & breadcrumbs
 
-This portfolio is a hands-on reflection of how I think, design, and build.
+### ✅ Analytics & Attribution Engineering
 
-🧱 What This Repository Contains
-✅ Professional Portfolio Website
+- Google Analytics 4 (GA4)
+- First-touch attribution (UTM-based)
+- User-level custom dimensions
+- Device & OS context capture
+- Analytics bootstrapping without duplication
 
-Static HTML/CSS/JavaScript (no frameworks)
+### ✅ Engineering-Driven Design Decisions
 
-SEO-optimized structure
+- No frontend frameworks
+- No backend dependency
+- Hosted on free infrastructure
+- Designed for speed, clarity, and long-term maintainability
 
-Mobile-first responsive design
+---
 
-Theme support (light / dark)
+## 🛠️ Tech Stack
 
-Clean navigation & breadcrumbs
+### Frontend
 
-✅ Analytics & Attribution Engineering
+- HTML5
+- CSS3 (custom design tokens)
+- Vanilla JavaScript (IIFE-based modular scripts)
 
-Google Analytics 4 (GA4)
+### Analytics
 
-First-touch attribution (UTM-based)
+- Google Analytics 4 (GA4)
+- Custom attribution & user-property logic
+- Event & user-scope custom dimensions
 
-User-level custom dimensions
+### Hosting & Infra
 
-Device & OS context capture
+- Render (static hosting)
+- GitHub for version control
 
-Analytics bootstrapping without duplication
+### SEO & Performance
 
-✅ Engineering-Driven Design Decisions
+- Structured metadata (Schema.org)
+- Sitemap & indexing support
+- Lighthouse-friendly architecture
 
-No runtime dependencies
+---
 
-No backend required
+## 📂 Repository Structure
 
-Hosted on free infrastructure
-
-Designed for speed, clarity, and longevity
-
-🛠️ Tech Stack
-
-Frontend
-
-HTML5
-
-CSS3 (custom design tokens)
-
-Vanilla JavaScript (IIFE-based modular scripts)
-
-Analytics
-
-Google Analytics 4 (GA4)
-
-Custom attribution & user-property logic
-
-Event & user-scope custom dimensions
-
-Hosting
-
-Render (static hosting)
-
-GitHub for version control
-
-SEO & Performance
-
-Structured metadata
-
-Sitemap & indexing support
-
-Lighthouse-friendly architecture
-
-📂 Repository Structure
+```text
 portfolio/
 ├── index.html
 ├── assets/
-│ ├── css/
-│ │ ├── styles.css
-│ │ ├── breadcrumb.css
-│ │ └── page-specific styles
-│ ├── js/
-│ │ ├── template.js # Core UI + navigation logic
-│ │ ├── analytics.js # Attribution & analytics bootstrap
-│ │ ├── ga.js # GA4 initialization & user properties
-│ │ └── schema.js # SEO structured data
-│ └── images/
+│   ├── css/
+│   │   ├── styles.css
+│   │   ├── breadcrumb.css
+│   │   └── page-specific styles
+│   ├── js/
+│   │   ├── template.js        # Core UI & navigation logic
+│   │   ├── analytics.js       # Attribution & analytics bootstrap
+│   │   ├── ga.js              # GA4 initialization & user properties
+│   │   └── schema.js          # SEO structured data
+│   └── images/
 ├── edu/
-│ └── index.html # Certifications & education
+│   └── index.html             # Education & certifications
 ├── projects/
-│ └── _.html # Major automation & performance projects
+│   └── *.html                 # Automation & performance projects
 ├── companies/
-│ └── _.html # Experience & case studies
+│   └── *.html                 # Experience & case studies
 ├── sitemap.xml
 └── README.md
-
 📌 Featured Work Highlighted on the Site
-
 Performance Engineering
-
 Web & backend load testing (JMeter, Locust, K6)
 
 Frontend bottleneck identification
@@ -134,15 +118,13 @@ Frontend bottleneck identification
 Backend scalability validation
 
 Automation Architecture
-
-UI / API / Mobile frameworks
+UI / API / Mobile automation frameworks
 
 CI/CD quality gates
 
 Device-farm integrations
 
 Shadow & Data Validation
-
 Production traffic comparison
 
 Backend compatibility verification
@@ -150,20 +132,18 @@ Backend compatibility verification
 Risk-free migration testing
 
 QA Leadership & Strategy
-
-Org design (0 → 1 → scale)
+QA org design (0 → 1 → scale)
 
 Quality OKRs & governance
 
 Release confidence frameworks
 
 🎯 Why This Portfolio Is Built This Way
-
 This repository intentionally avoids:
 
-Heavy JS frameworks
+Heavy JavaScript frameworks
 
-Build pipelines
+Build-time toolchains
 
 Vendor lock-ins
 
@@ -175,12 +155,11 @@ Clear design trade-offs
 
 Observability-first thinking
 
-How quality, performance, and analytics fit together
+How quality, performance, analytics, and SEO work together
 
-This mirrors how I approach real production systems.
+This mirrors how I approach real-world production systems.
 
 📈 Analytics Philosophy Used Here
-
 First-touch attribution over session-based noise
 
 User-level dimensions instead of event bloat
@@ -193,12 +172,11 @@ Clear separation of concerns:
 
 UI logic
 
-Attribution
+Attribution capture
 
 Analytics delivery
 
 📬 Contact
-
 Email: csm@outlook.in
 
 LinkedIn: https://www.linkedin.com/in/cm6
@@ -216,15 +194,15 @@ Automation & performance architecture reviews
 Engineering excellence initiatives
 
 📄 License
-
 This project is intended for personal and professional showcase purposes.
 
 You are welcome to:
 
-Reference ideas
+Reference architectural ideas
 
 Learn from the structure
 
 Reuse patterns with attribution
 
-⭐ If you find this portfolio useful or inspiring, feel free to star the repository.
+⭐ If you find this repository useful or inspiring, feel free to star it.
+```
