@@ -8,10 +8,14 @@
     <title>Education & Certifications — Chetan Maikhuri</title>
     <meta name="description" content="Education and certifications of Chetan Maikhuri — Quality Engineering Leader." />
     <meta name="cm:breadcrumbs" content="Home:/|Experience" />
+
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <link rel="stylesheet" href="/assets/css/breadcrumb.css" />
     <link rel="stylesheet" href="/assets/css/edu/education.css" />
+
     <script src="/assets/js/template.js" defer></script>
+    <script src="/assets/data/education.js" defer></script>
+
 </head>
 
 <body>
@@ -46,52 +50,7 @@
                     </p>
                 </header>
 
-                <div class="section-grid">
-                    <a class="card" href="/edu/masters-it.html" aria-label="Masters in Information Technology">
-                        <div class="card-header">
-                            <h3 class="card-title">Masters in Information Technology</h3>
-                            <p class="card-meta">Postgraduate Degree</p>
-                        </div>
-                        <div class="card-body">
-                            Advanced studies covering systems, software engineering,
-                            and applied IT fundamentals.
-                        </div>
-                    </a>
-
-                    <a class="card" href="/edu/masters-finance.html" aria-label="Masters in Financial Management">
-                        <div class="card-header">
-                            <h3 class="card-title">Masters in Financial Management</h3>
-                            <p class="card-meta">3-Year Program</p>
-                        </div>
-                        <div class="card-body">
-                            Strong grounding in finance, risk, and business decision-making,
-                            complementing technical leadership roles.
-                        </div>
-                    </a>
-
-                    <a class="card" href="/edu/gniit.html" aria-label="GNIIT Software Engineering">
-                        <div class="card-header">
-                            <h3 class="card-title">GNIIT — Software Engineering</h3>
-                            <p class="card-meta">3-Year Professional Program</p>
-                        </div>
-                        <div class="card-body">
-                            Hands-on program focused on software development,
-                            databases, and enterprise systems.
-                        </div>
-                    </a>
-
-                    <a class="card" href="/edu/advanced-data-science-iiitb.html"
-                        aria-label="Advanced Data Science Program">
-                        <div class="card-header">
-                            <h3 class="card-title">Advanced Data Science Program</h3>
-                            <p class="card-meta">IIIT Bangalore</p>
-                        </div>
-                        <div class="card-body">
-                            Applied data science, ML fundamentals, and analytics
-                            for real-world engineering problems.
-                        </div>
-                    </a>
-                </div>
+                <div id="education-cards" class="section-grid"></div>
             </section>
 
             <!-- ================= Certifications ================= -->
@@ -103,37 +62,38 @@
                     </p>
                 </header>
 
-                <div class="section-grid">
-                    <a class="card" href="/edu/azure-fundamentals.html" aria-label="Microsoft Azure Fundamentals">
-                        <div class="card-header">
-                            <h3 class="card-title">Microsoft Azure Fundamentals</h3>
-                        </div>
-                    </a>
-
-                    <a class="card" href="/edu/azure-developer.html" aria-label="Azure Developer Associate">
-                        <div class="card-header">
-                            <h3 class="card-title">Azure Developer Associate</h3>
-                        </div>
-                    </a>
-
-                    <a class="card" href="/edu/azure-administrator.html" aria-label="Azure Administrator Associate">
-                        <div class="card-header">
-                            <h3 class="card-title">Azure Administrator Associate</h3>
-                        </div>
-                    </a>
-
-                    <a class="card" href="/edu/sql-developer.html" aria-label="Microsoft SQL Developer">
-                        <div class="card-header">
-                            <h3 class="card-title">Microsoft SQL Developer</h3>
-                        </div>
-                    </a>
-                </div>
+                <div id="certification-cards" class="section-grid"></div>
             </section>
 
         </div>
     </main>
 
     <footer id="site-footer"></footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof renderCards !== "function") {
+                console.warn("renderCards() not found");
+                return;
+            }
+
+            // Education cards
+            if (window.CM_CARDS?.education) {
+                renderCards({
+                    containerId: "education-cards",
+                    cards: window.CM_CARDS.education
+                });
+            }
+
+            // Certification cards
+            if (window.CM_CARDS?.certifications) {
+                renderCards({
+                    containerId: "certification-cards",
+                    cards: window.CM_CARDS.certifications
+                });
+            }
+        });
+    </script>
+
 </body>
 
 </html>

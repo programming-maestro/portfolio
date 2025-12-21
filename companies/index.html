@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <link rel="stylesheet" href="/assets/css/breadcrumb.css" />
     <script src="/assets/js/template.js" defer></script>
+    <script src="/assets/data/experience.js" defer></script>
 </head>
 
 <body>
@@ -80,126 +81,7 @@
                     </p>
                 </header>
 
-                <div class="section-grid">
-                    <!-- TrueMeds -->
-                    <a class="card" href="/companies/truemeds.html">
-                        <div class="card-header">
-                            <h3 class="card-title">TrueMeds — Head of Quality Assurance</h3>
-                            <p class="card-meta">Jul 2023 — Dec 2024 · Healthcare eCommerce</p>
-                        </div>
-                        <div class="card-body">
-                            Led and scaled a 29-member QA organization from the ground up, achieving 99% deployment
-                            stability while reducing QA cycle time by 70%, significantly accelerating time-to-market.
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag">Org-wide QA</span>
-                            <span class="card-tag">Multi-products</span>
-                            <span class="card-tag">Release governance</span>
-                        </div>
-                    </a>
-
-                    <!-- ShareChat -->
-                    <a class="card" href="/companies/sharechat.html">
-                        <div class="card-header">
-                            <h3 class="card-title">ShareChat — QA Automation Head</h3>
-                            <p class="card-meta">Feb 2022 — Nov 2022 · Entertainment</p>
-                        </div>
-                        <div class="card-body">
-                            Modernized automation across a 30M+ DAU platform, boosting test throughput 55% and reducing
-                            mobile test time by 70% via device-farm integration.
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag">Mobile automation</span>
-                            <span class="card-tag">Device farm</span>
-                            <span class="card-tag">Shift-left QA</span>
-                        </div>
-                    </a>
-
-                    <!-- Amazon -->
-                    <a class="card" href="/companies/amazon.html">
-                        <div class="card-header">
-                            <h3 class="card-title">Amazon — Lead QAE</h3>
-                            <p class="card-meta">Dec 2020 — Apr 2022 · Digital Catalog</p>
-                        </div>
-                        <div class="card-body">
-                            Strengthened CI/CD quality gates and established performance/scalability QA, reducing
-                            release defects ~50% across high-velocity global digital catalog systems.
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag">Performance</span>
-                            <span class="card-tag">CI/CD gates</span>
-                            <span class="card-tag">Retail scale</span>
-                        </div>
-                    </a>
-
-                    <!-- UBS -->
-                    <a class="card" href="/companies/ubs.html">
-                        <div class="card-header">
-                            <h3 class="card-title">UBS — Release Manager</h3>
-                            <p class="card-meta">Oct 2018 — Nov 2020 · FXMM Middle Office</p>
-                        </div>
-                        <div class="card-body">
-                            Directed release readiness for tier-1 trading systems, achieving 100% compliant deployments
-                            and cutting test cycles by ~45%.
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag">Capital markets</span>
-                            <span class="card-tag">Low latency</span>
-                            <span class="card-tag">Integration QA</span>
-                        </div>
-                    </a>
-
-                    <!-- BNP Paribas -->
-                    <a class="card" href="/companies/bnpp.html">
-                        <div class="card-header">
-                            <h3 class="card-title">BNP Paribas — Sr. QA Engineer</h3>
-                            <p class="card-meta">Jul 2018 — Nov 2018 · Capital markets - Front office</p>
-                        </div>
-                        <div class="card-body">
-                            Built a Python-based API automation framework, elevating reliability, scalability and
-                            reducing manual validation effort across business flows.
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag">Front office</span>
-                            <span class="card-tag">Trading UI</span>
-                        </div>
-                    </a>
-
-                    <!-- JP Morgan -->
-                    <a class="card" href="/companies/jpmorgan.html">
-                        <div class="card-header">
-                            <h3 class="card-title">JP Morgan — Automation Project Lead</h3>
-                            <p class="card-meta">Apr 2018 — Apr 2018 · Commercial cards · Trade finance</p>
-                        </div>
-                        <div class="card-body">
-                            Led Automation CoE to define a unified automation modernization blueprint, delivering
-                            high-reuse frameworks and cutting regression cycles by 50%.
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag">Investment Banking</span>
-                            <span class="card-tag">Trade finance</span>
-                            <span class="card-tag">Commercial Cards</span>
-                        </div>
-                    </a>
-
-
-                    <!-- Cirrius -->
-                    <a class="card" href="/companies/cirrius.html">
-                        <div class="card-header">
-                            <h3 class="card-title">Cirrius — Jr. Programmer</h3>
-                            <p class="card-meta">Sep 2011 — Apr 2013 · Insurance · Pharma apps</p>
-                        </div>
-                        <div class="card-body">
-                            Designed and executed early automation suites that accelerated releases and improved product
-                            stability for a fast-growing <strong>SaaS</strong> platform.
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag">Banking</span>
-                            <span class="card-tag">Insurance</span>
-                            <span class="card-tag">Mobile QA</span>
-                        </div>
-                    </a>
-                </div>
+                <div id="experience-cards" class="section-grid"></div>
             </section>
 
             <!-- Section: Call to action -->
@@ -225,6 +107,26 @@
 
     <!-- Footer is injected by template.js -->
     <footer id="site-footer"></footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Safety checks (very important during refactors)
+            if (typeof renderCards !== "function") {
+                console.warn("renderCards() not found");
+                return;
+            }
+
+            if (!window.CM_CARDS || !window.CM_CARDS.experience) {
+                console.warn("Experience cards data not loaded");
+                return;
+            }
+
+            renderCards({
+                containerId: "experience-cards",
+                cards: window.CM_CARDS.experience
+            });
+        });
+    </script>
+
 </body>
 
 </html>

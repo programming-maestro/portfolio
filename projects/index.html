@@ -8,10 +8,12 @@
     <meta name="description"
         content="Projects and initiatives across web automation, mobile automation, API testing, performance testing and shadow testing led by Chetan Maikhuri." />
     <meta name="cm:breadcrumbs" content="Home:/|Projects" />
+
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <link rel="stylesheet" href="/assets/css/breadcrumb.css" />
 
     <script src="/assets/js/template.js" defer></script>
+    <script src="/assets/data/projects.js" defer></script>
 </head>
 
 <body>
@@ -84,93 +86,7 @@
                     </p>
                 </header>
 
-                <div class="section-grid">
-                    <!-- Web automation -->
-                    <a class="card" href="/projects/web-automation.html">
-                        <div class="card-header">
-                            <h3 class="card-title">Web Automation</h3>
-                            <p class="card-meta">Unified cross-product web automation at scale</p>
-                        </div>
-                        <div class="card-body">
-                            Consolidated fragmented Selenium / Playwright suites into a
-                            single platform with common libraries, stable locators and
-                            dashboards for release readiness.
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag">Selenium / Playwright</span>
-                            <span class="card-tag">Regression</span>
-                            <span class="card-tag">Release gates</span>
-                        </div>
-                    </a>
-
-                    <!-- Mobile automation -->
-                    <a class="card" href="/projects/mobile-automation.html">
-                        <div class="card-header">
-                            <h3 class="card-title">Mobile Automation</h3>
-                            <p class="card-meta">Android & iOS across device farms</p>
-                        </div>
-                        <div class="card-body">
-                            Standardised mobile automation, integrated device farms and
-                            reduced flaky tests while keeping coverage for critical journeys high.
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag">Appium / Maestro</span>
-                            <span class="card-tag">Device farm</span>
-                            <span class="card-tag">Crash-free focus</span>
-                        </div>
-                    </a>
-
-                    <!-- API automation -->
-                    <a class="card" href="/projects/api-automation.html">
-                        <div class="card-header">
-                            <h3 class="card-title">API / BE Automation</h3>
-                            <p class="card-meta">Service-first testing and contract safety nets</p>
-                        </div>
-                        <div class="card-body">
-                            Built API-first automation and contract tests to protect
-                            integrations, speed up backend changes and cut integration incidents.
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag">REST / GraphQL</span>
-                            <span class="card-tag">Contract tests</span>
-                            <span class="card-tag">CI integration</span>
-                        </div>
-                    </a>
-
-                    <!-- Performance testing -->
-                    <a class="card" href="/projects/performance-testing.html">
-                        <div class="card-header">
-                            <h3 class="card-title">Performance & Scalability Testing</h3>
-                            <p class="card-meta">From ad-hoc load tests to repeatable practice</p>
-                        </div>
-                        <div class="card-body">
-                            Defined performance strategy, scenarios and SLOs for
-                            business-critical flows, wired into pre-release checks.
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag">Load & stress</span>
-                            <span class="card-tag">SLOs</span>
-                            <span class="card-tag">Peak readiness</span>
-                        </div>
-                    </a>
-
-                    <!-- Shadow testing -->
-                    <a class="card" href="/projects/shadow-testing.html">
-                        <div class="card-header">
-                            <h3 class="card-title">Shadow testing & safe rollouts</h3>
-                            <p class="card-meta">Testing in production without impacting users</p>
-                        </div>
-                        <div class="card-body">
-                            Used shadow traffic and comparison pipelines to validate new
-                            services and algorithms before full rollout.
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag">Canary</span>
-                            <span class="card-tag">Shadow traffic</span>
-                            <span class="card-tag">Safety nets</span>
-                        </div>
-                    </a>
-                </div>
+                <div id="projects-cards" class="section-grid"></div>
             </section>
 
             <!-- Section: Why this matters -->
@@ -198,6 +114,25 @@
     </main>
 
     <footer id="site-footer"></footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof renderCards !== "function") {
+                console.warn("renderCards() not found");
+                return;
+            }
+
+            if (!window.CM_CARDS || !window.CM_CARDS.projects) {
+                console.warn("Project cards data missing");
+                return;
+            }
+
+            renderCards({
+                containerId: "projects-cards",
+                cards: window.CM_CARDS.projects
+            });
+        });
+    </script>
 </body>
 
 </html>

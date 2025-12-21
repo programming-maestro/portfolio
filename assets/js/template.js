@@ -475,6 +475,58 @@
 
   document.head.appendChild(schemaScript);
 })();
+
+// -----------------------------
+// Generic Card Renderer (Global)
+// -----------------------------
+function renderCards({ containerId, cards }) {
+  const container = document.getElementById(containerId);
+  if (!container) {
+    console.warn("[renderCards] container not found:", containerId);
+    return;
+  }
+
+  if (!Array.isArray(cards) || cards.length === 0) {
+    console.warn("[renderCards] no cards provided for:", containerId);
+    return;
+  }
+
+  container.innerHTML = cards
+    .map((c, index) => {
+      const label =
+        c.analyticsLabel ||
+        c.title?.toLowerCase().replace(/\s+/g, "-") ||
+        `card-${index}`;
+
+      return `
+        <a
+          class="card"
+          href="${c.href || "#"}"
+          data-analytics="card"
+          data-label="${label}"
+        >
+          <div class="card-header">
+            <h3 class="card-title">${c.title || ""}</h3>
+            ${c.meta ? `<p class="card-meta">${c.meta}</p>` : ""}
+          </div>
+
+          ${c.body ? `<div class="card-body">${c.body}</div>` : ""}
+
+          ${
+            c.tags?.length
+              ? `<div class="card-tags">
+                  ${c.tags
+                    .map((t) => `<span class="card-tag">${t}</span>`)
+                    .join("")}
+                </div>`
+              : ""
+          }
+        </a>
+      `;
+    })
+    .join("");
+}
+
 // -----------------------------
 // Global favicon injection
 // -----------------------------
