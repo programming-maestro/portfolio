@@ -109,100 +109,89 @@ portfolio/
 │   └── *.html                 # Experience & case studies
 ├── sitemap.xml
 └── README.md
-📌 Featured Work Highlighted on the Site
-Performance Engineering
-Web & backend load testing (JMeter, Locust, K6)
 
-Frontend bottleneck identification
 
-Backend scalability validation
+## 📌 Featured Work Highlighted on the Site
 
-Automation Architecture
-UI / API / Mobile automation frameworks
+### Performance Engineering
+- Web & backend load testing (JMeter, Locust, K6)
+- Frontend bottleneck identification
+- Backend scalability validation
 
-CI/CD quality gates
+### Automation Architecture
+- UI / API / Mobile automation frameworks
+- CI/CD quality gates
+- Device-farm integrations
 
-Device-farm integrations
+### Shadow & Data Validation
+- Production traffic comparison
+- Backend compatibility verification
+- Risk-free migration testing
 
-Shadow & Data Validation
-Production traffic comparison
+### QA Leadership & Strategy
+- QA org design (0 → 1 → scale)
+- Quality OKRs & governance
+- Release confidence frameworks
 
-Backend compatibility verification
+---
 
-Risk-free migration testing
+## 🎯 Why This Portfolio Is Built This Way
 
-QA Leadership & Strategy
-QA org design (0 → 1 → scale)
-
-Quality OKRs & governance
-
-Release confidence frameworks
-
-🎯 Why This Portfolio Is Built This Way
 This repository intentionally avoids:
 
-Heavy JavaScript frameworks
-
-Build-time toolchains
-
-Vendor lock-ins
+- Heavy JavaScript frameworks
+- Build-time toolchains
+- Vendor lock-ins
 
 Instead, it demonstrates:
 
-Strong engineering fundamentals
-
-Clear design trade-offs
-
-Observability-first thinking
-
-How quality, performance, analytics, and SEO work together
+- Strong engineering fundamentals
+- Clear design trade-offs
+- Observability-first thinking
+- How quality, performance, analytics, and SEO work together
 
 This mirrors how I approach real-world production systems.
 
-📈 Analytics Philosophy Used Here
-First-touch attribution over session-based noise
+---
 
-User-level dimensions instead of event bloat
+## 📈 Analytics Philosophy Used Here
 
-Minimal analytics overhead
+- First-touch attribution over session-based noise
+- User-level dimensions instead of event bloat
+- Minimal analytics overhead
+- No duplicate GA initialization
+- Clear separation of concerns:
+  - UI logic
+  - Attribution capture
+  - Analytics delivery
 
-No duplicate GA initialization
+---
 
-Clear separation of concerns:
+## 📬 Contact
 
-UI logic
-
-Attribution capture
-
-Analytics delivery
-
-📬 Contact
-Email: csm@outlook.in
-
-LinkedIn: https://www.linkedin.com/in/cm6
-
-GitHub: https://github.com/programming-maestro
+- **Email:** csm@outlook.in
+- **LinkedIn:** https://www.linkedin.com/in/cm6
+- **GitHub:** https://github.com/programming-maestro
 
 I’m open to:
 
-Fractional QA leadership
+- Fractional QA leadership
+- Consulting & advisory roles
+- Automation & performance architecture reviews
+- Engineering excellence initiatives
 
-Consulting & advisory roles
+---
 
-Automation & performance architecture reviews
+## 📄 License
 
-Engineering excellence initiatives
-
-📄 License
-This project is intended for personal and professional showcase purposes.
+This project is intended for **personal and professional showcase purposes**.
 
 You are welcome to:
+- Reference architectural ideas
+- Learn from the structure
+- Reuse patterns with attribution
 
-Reference architectural ideas
+---
 
-Learn from the structure
-
-Reuse patterns with attribution
-
-⭐ If you find this repository useful or inspiring, feel free to star it.
+⭐ If you find this repository useful or inspiring, feel free to **star** it.
 ```
