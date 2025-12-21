@@ -151,7 +151,7 @@
         </nav>
       </div>
 
-      <div class="nav-menu" data-role="nav-menu">
+      <div class="nav-menu" data-role="nav-menu" data-nav-location="header">
         <div class="nav-menu-inner">
           ${navLinks}
         </div>
