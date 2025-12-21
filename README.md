@@ -188,13 +188,25 @@ I’m open to:
 
 ## 📄 License
 
-This project is intended for **personal and professional showcase purposes**.
+**All rights reserved.**
 
-You are welcome to:
+This repository and its contents are intended **solely for personal and professional showcase purposes**.
 
-- Reference architectural ideas
-- Learn from the structure
-- Reuse patterns with attribution
+### Usage Restrictions
+
+- ❌ Copying or reusing the source code, project structure, design patterns, or implementation details is **not permitted**
+- ❌ Redistribution, modification, or derivative works are **not allowed**
+- ❌ Commercial or non-commercial reuse is **explicitly prohibited**
+
+### What _is_ allowed
+
+- ✅ Viewing the repository for evaluation or reference
+- ✅ Reading the content for learning or inspiration **without copying**
+- ✅ Discussing high-level concepts with proper attribution
+
+If you would like to reuse any part of this repository, **explicit written permission** from the author is required.
+
+© Chetan Maikhuri. All rights reserved.
 
 ---
 
